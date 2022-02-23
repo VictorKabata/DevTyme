@@ -44,7 +44,7 @@ object Dependencies {
     const val ktorLogging = "io.ktor:ktor-client-logging:${Versions.ktor}"
     const val ktorAndroid = "io.ktor:ktor-client-android:${Versions.ktor}"
     const val ktoriOS = "io.ktor:ktor-client-ios:${Versions.ktor}"
-    const val ktorAuth = "io.ktor:ktor-auth:${Versions.ktor}"
+    const val ktorClientAuth = "io.ktor:ktor-client-auth:${Versions.ktor}"
 
     const val multiplatformPaging =
         "io.github.kuuuurt:multiplatform-paging:${Versions.multiplatformPaging}"

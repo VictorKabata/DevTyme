@@ -28,7 +28,7 @@ kotlin {
                 implementation(Dependencies.ktorCore)
                 implementation(Dependencies.ktorSerialization)
                 implementation(Dependencies.ktorLogging)
-                implementation(Dependencies.ktorAuth)
+                implementation(Dependencies.ktorClientAuth)
 
                 // implementation(Dependencies.realm)
             }

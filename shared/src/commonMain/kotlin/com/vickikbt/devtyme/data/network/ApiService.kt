@@ -1,3 +1,6 @@
 package com.vickikbt.devtyme.data.network
 
-class tbd
+interface ApiService {
+
+    suspend fun authenticateUser()
+}
