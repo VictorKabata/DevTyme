@@ -1,27 +1,88 @@
 plugins {
     id("com.android.application")
-    kotlin("android")
+    id("kotlin-android")
+    id("kotlin-kapt")
 }
 
 android {
-    compileSdk = 31
+    compileSdk = AndroidSdk.compileSdkVersion
+
     defaultConfig {
-        applicationId = "com.vickikbt.devtyme.android"
-        minSdk = 21
-        targetSdk = 31
-        versionCode = 1
-        versionName = "1.0"
-    }
-    buildTypes {
-        getByName("release") {
-            isMinifyEnabled = false
+        applicationId = AndroidSdk.applicationId
+        minSdk = AndroidSdk.minSdkVersion
+        targetSdk = AndroidSdk.targetSdkVersion
+
+        versionCode = AndroidSdk.versionCode
+        versionName = AndroidSdk.versionName
+        testInstrumentationRunner = AndroidSdk.testInstrumentationRunner
+
+        vectorDrawables {
+            useSupportLibrary = true
         }
     }
+
+    buildFeatures {
+        compose = true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = Versions.compose
+        // kotlinCompilerVersion = Versions.composeCompiler
+    }
+
+    buildTypes {
+        getByName("release") {
+            isMinifyEnabled = true
+            isShrinkResources = true
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions { jvmTarget = JavaVersion.VERSION_1_8.toString() }
 }
 
 dependencies {
     implementation(project(":shared"))
-    implementation("com.google.android.material:material:1.4.0")
-    implementation("androidx.appcompat:appcompat:1.3.1")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.0")
+
+    implementation(Dependencies.androidCore)
+    implementation(Dependencies.appCompat)
+
+    implementation(Dependencies.material)
+
+    implementation(Dependencies.composeUi)
+    implementation(Dependencies.composeMaterial)
+    implementation(Dependencies.composeTooling)
+    // androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_version"
+    implementation(Dependencies.composeLiveData)
+    // debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
+    implementation(Dependencies.composeActivity)
+
+    implementation(Dependencies.lifeCycleRuntime)
+
+    // Koin-Dependency injection
+    implementation(Dependencies.koinAndroid)
+    implementation(Dependencies.koinCompose)
+
+    // Accompanist Libs
+    implementation(Dependencies.accompanistNavigationAnimation)
+
+    // Splash Screen API
+    implementation(Dependencies.splashScreen)
+
+    // Coil-Image Loader
+    implementation(Dependencies.coil)
+
+    // Timber-Logging
+    implementation(Dependencies.timber)
+
+    // Compose Navigation-Navigation between various screens
+    implementation(Dependencies.navigation)
 }

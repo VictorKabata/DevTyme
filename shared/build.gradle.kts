@@ -5,7 +5,7 @@ plugins {
 
 kotlin {
     android()
-    
+
     listOf(
         iosX64(),
         iosArm64(),
@@ -17,16 +17,28 @@ kotlin {
     }
 
     sourceSets {
-        val commonMain by getting
+        val commonMain by getting {
+            dependencies {
+            }
+        }
+
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test"))
             }
         }
-        val androidMain by getting
+
+        val androidMain by getting {
+            dependencies {
+            }
+        }
+
         val androidTest by getting
+
         val iosX64Main by getting
+
         val iosArm64Main by getting
+
         val iosSimulatorArm64Main by getting
         val iosMain by creating {
             dependsOn(commonMain)
@@ -34,6 +46,7 @@ kotlin {
             iosArm64Main.dependsOn(this)
             iosSimulatorArm64Main.dependsOn(this)
         }
+
         val iosX64Test by getting
         val iosArm64Test by getting
         val iosSimulatorArm64Test by getting
