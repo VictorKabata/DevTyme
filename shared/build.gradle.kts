@@ -8,8 +8,7 @@ kotlin {
 
     listOf(
         iosX64(),
-        iosArm64(),
-        iosSimulatorArm64()
+        iosArm64()
     ).forEach {
         it.binaries.framework {
             baseName = "shared"
@@ -29,6 +28,7 @@ kotlin {
                 implementation(Dependencies.ktorCore)
                 implementation(Dependencies.ktorSerialization)
                 implementation(Dependencies.ktorLogging)
+                implementation(Dependencies.ktorAuth)
 
                 // implementation(Dependencies.realm)
             }
