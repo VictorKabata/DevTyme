@@ -1,15 +1,26 @@
 package com.vickikbt.devtyme.data.network.models
 
-data class AccessTokenDto(
-    var accessToken: String,
-    var expiresIn: Double,
-    var refreshToken: String,
-    var scope: String,
-    var tokenType: String,
-    var uid: String,
-    var createdAt: Float
-) {
+import kotlinx.serialization.SerialName
 
-    // Check for expiry condition
-    fun isValid(currentTimeSec: Float) = createdAt + expiresIn > currentTimeSec
-}
+data class AccessTokenDto(
+    @SerialName("access_token")
+    var accessToken: String? = null,
+
+    @SerialName("expires_in")
+    var expiresIn: Double? = null,
+
+    @SerialName("refresh_token")
+    var refreshToken: String? = null,
+
+    @SerialName("scope")
+    var scope: String? = null,
+
+    @SerialName("token_type")
+    var tokenType: String? = null,
+
+    @SerialName("uid")
+    var uid: String? = null,
+
+    @SerialName("created_at")
+    var createdAt: Float? = null
+)
