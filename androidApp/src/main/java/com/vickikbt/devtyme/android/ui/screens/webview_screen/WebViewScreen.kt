@@ -8,25 +8,32 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.viewinterop.AndroidView
+import com.vickikbt.devtyme.domain.utils.Constants
 
 @Composable
-fun WebViewScreen(url: String = "https://google.com/") {
+fun WebViewScreen(url: String = Constants.WEB_URL) {
 
     Box(modifier = Modifier.fillMaxWidth()) {
-        AndroidView(factory = {
-            WebView(it).apply {
+        AndroidView(
+            factory = {
+                WebView(it).apply {
 
-                webViewClient = object : WebViewClient() {
-                    override fun shouldOverrideUrlLoading(
-                        view: WebView?,
-                        request: WebResourceRequest?
-                    ): Boolean {
-                        return false
+                    webViewClient = object : WebViewClient() {
+                        override fun shouldOverrideUrlLoading(
+                            view: WebView?,
+                            request: WebResourceRequest?
+                        ): Boolean {
+                            return false
+                        }
                     }
+
+                    settings.javaScriptEnabled = true
+                    settings.javaScriptCanOpenWindowsAutomatically = true
                 }
+            },
+            update = {
+                it.loadUrl(url)
             }
-        }, update = {
-            it.loadUrl(url)
-        })
+        )
     }
 }
