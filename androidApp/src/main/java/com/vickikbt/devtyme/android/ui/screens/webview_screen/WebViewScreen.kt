@@ -8,10 +8,11 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.viewinterop.AndroidView
+import androidx.navigation.NavController
 import com.vickikbt.devtyme.domain.utils.Constants
 
 @Composable
-fun WebViewScreen(url: String = Constants.WEB_URL) {
+fun WebViewScreen(url: String = Constants.WEB_URL, navController: NavController) {
 
     Box(modifier = Modifier.fillMaxWidth()) {
         AndroidView(

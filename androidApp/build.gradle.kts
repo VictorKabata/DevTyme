@@ -60,6 +60,7 @@ dependencies {
     implementation(Dependencies.composeUi)
     implementation(Dependencies.composeMaterial)
     implementation(Dependencies.composeTooling)
+    implementation(Dependencies.composeConstraint)
     // androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_version"
     implementation(Dependencies.composeLiveData)
     // debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
