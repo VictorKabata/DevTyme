@@ -29,11 +29,12 @@ import androidx.navigation.NavController
 import com.vickikbt.devtyme.android.R
 import com.vickikbt.devtyme.android.utils.findActivity
 import com.vickikbt.devtyme.domain.utils.Constants
+import org.koin.androidx.compose.getViewModel
 import timber.log.Timber
 import java.util.*
 
 @Composable
-fun LoginScreen(navController: NavController) {
+fun LoginScreen(navController: NavController, viewModel: LoginViewModel = getViewModel()) {
 
     val context = LocalContext.current
 
@@ -84,8 +85,8 @@ fun LoginScreen(navController: NavController) {
         }
     }
 
-    DisposableEffect(key1 = "") {
-        onResume(context = context)
+    DisposableEffect(key1 = viewModel) {
+        onResume(context = context, viewModel = viewModel)
         onDispose { /*ToDo*/ }
     }
 }
@@ -95,16 +96,15 @@ private fun wakatimeOAuth(context: Context) {
     context.startActivity(intent)
 }
 
-fun onResume(context: Context) {
+fun onResume(context: Context, viewModel: LoginViewModel) {
     val uri = context.findActivity()?.intent?.data
 
     if (uri != null && uri.toString().contains(Constants.REDIRECT_URL)) {
         val code = uri.getQueryParameter("code")
 
         if (code != null) {
-            Timber.e("Code: $code")
             Log.e("VickiKbt", "Code: $code")
-            // viewModel.fetchUserToken(code = it) ToDo: Request Access Token
+            viewModel.fetchUserToken(code = code)
         } else uri.getQueryParameter("error")?.let {
             Timber.e(RuntimeException(it))
         }
