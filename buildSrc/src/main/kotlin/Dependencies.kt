@@ -11,8 +11,9 @@ object Dependencies {
     const val composeTooling = "androidx.compose.ui:ui-tooling-preview:${Versions.compose}"
     const val composeLiveData = "androidx.compose.runtime:runtime-livedata:${Versions.compose}"
     const val composeActivity = "androidx.activity:activity-compose:${Versions.composeActivity}"
+    const val composeConstraint =
+        "androidx.constraintlayout:constraintlayout-compose:${Versions.composeConstraint}"
     // const val composeCompiler = "1.5.21"
-    // const val composeConstraint = "1.0.0-rc01"
 
     const val lifeCycleRuntime = "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.lifecycle}"
     const val accompanistNavigationAnimation =
@@ -55,11 +56,7 @@ object Dependencies {
 
     const val realm = "io.realm.kotlin:library-base:${Versions.realm}"
 
-    const val cabretLog = "de.jensklingenberg.cabret:cabret-log:${Versions.cabretLog}"
-    const val cabretLogAndroid =
-        "de.jensklingenberg.cabret:cabret-log-android:${Versions.cabretLog}"
-    const val cabretLogiOS = "de.jensklingenberg.cabret:cabret-log-iosx64:${Versions.cabretLog}"
-    const val cabretLogJvm = "de.jensklingenberg.cabret:cabret-log-jvm:${Versions.cabretLog}"
+    const val napier = "io.github.aakira:napier:${Versions.napier}"
 
     const val jUnit = "4.13.2"
     const val truth = "1.1.3"

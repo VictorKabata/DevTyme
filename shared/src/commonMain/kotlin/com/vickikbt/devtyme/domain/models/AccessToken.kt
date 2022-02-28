@@ -1,15 +1,17 @@
 package com.vickikbt.devtyme.domain.models
 
 data class AccessToken(
-    var accessToken: String,
-    var expiresIn: Double,
-    var refreshToken: String,
-    var scope: String,
-    var tokenType: String,
-    var uid: String,
-    var createdAt: Float
-) {
+    var accessToken: String? = null,
 
-    // Check for expiry condition
-    fun isValid(currentTimeSec: Float) = createdAt + expiresIn > currentTimeSec
-}
+    var expiresIn: Double? = null,
+
+    var refreshToken: String? = null,
+
+    var scope: String? = null,
+
+    var tokenType: String? = null,
+
+    var uid: String? = null,
+
+    var createdAt: Float? = null
+)

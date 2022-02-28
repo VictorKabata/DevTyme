@@ -60,6 +60,7 @@ dependencies {
     implementation(Dependencies.composeUi)
     implementation(Dependencies.composeMaterial)
     implementation(Dependencies.composeTooling)
+    implementation(Dependencies.composeConstraint)
     // androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_version"
     implementation(Dependencies.composeLiveData)
     // debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
@@ -79,9 +80,6 @@ dependencies {
 
     // Coil-Image Loader
     implementation(Dependencies.coil)
-
-    // Timber-Logging
-    implementation(Dependencies.timber)
 
     // Compose Navigation-Navigation between various screens
     implementation(Dependencies.navigation)

@@ -32,7 +32,7 @@ object Versions {
 
     const val realm = "0.9.0"
 
-    const val cabretLog = "1.0.4"
+    const val napier = "2.4.0"
 
     const val jUnit = "4.13.2"
     const val truth = "1.1.3"

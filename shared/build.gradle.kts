@@ -1,6 +1,8 @@
 plugins {
     kotlin("multiplatform")
     id("com.android.library")
+    kotlin("plugin.serialization") version Versions.kotlinSerialization
+    id("io.realm.kotlin") version Versions.realm
 }
 
 kotlin {
@@ -30,7 +32,9 @@ kotlin {
                 implementation(Dependencies.ktorLogging)
                 implementation(Dependencies.ktorClientAuth)
 
-                // implementation(Dependencies.realm)
+                implementation(Dependencies.realm)
+
+                api(Dependencies.napier)
             }
         }
 
@@ -52,11 +56,6 @@ kotlin {
             }
         }
 
-        /*val iosMain by getting {
-            dependencies {
-            }
-        }*/
-
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test"))
@@ -76,10 +75,10 @@ kotlin {
 }
 
 android {
-    compileSdk = 31
+    compileSdk = AndroidSdk.compileSdkVersion
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     defaultConfig {
-        minSdk = 21
-        targetSdk = 31
+        minSdk = AndroidSdk.minSdkVersion
+        targetSdk = AndroidSdk.targetSdkVersion
     }
 }
