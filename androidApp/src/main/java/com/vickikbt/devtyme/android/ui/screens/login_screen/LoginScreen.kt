@@ -103,7 +103,9 @@ fun onResume(context: Context, viewModel: LoginViewModel) {
 
         if (code != null) {
             Napier.e("Code: $code")
-            viewModel.fetchUserToken(code = code)
+            viewModel.fetchUserToken(code = code).also {
+                viewModel.getUserToken()
+            }
         } else uri.getQueryParameter("error")?.let {
             Napier.e("Error: $it")
         }

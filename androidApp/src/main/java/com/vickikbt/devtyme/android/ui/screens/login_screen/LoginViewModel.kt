@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.vickikbt.devtyme.data.repository.AuthRepository
 import io.github.aakira.napier.Napier
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
 class LoginViewModel constructor(private val authRepository: AuthRepository) : ViewModel() {
@@ -11,10 +12,16 @@ class LoginViewModel constructor(private val authRepository: AuthRepository) : V
     fun fetchUserToken(code: String) {
         viewModelScope.launch {
             try {
-                val response = authRepository.fetchUserToken(code)
+                authRepository.fetchUserToken(code)
             } catch (e: Exception) {
                 Napier.e("Error: ${e.localizedMessage}")
             }
+        }
+    }
+
+    fun getUserToken() {
+        viewModelScope.launch {
+            authRepository.getUserToken()
         }
     }
 }
