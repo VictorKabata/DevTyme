@@ -81,9 +81,6 @@ dependencies {
     // Coil-Image Loader
     implementation(Dependencies.coil)
 
-    // Timber-Logging
-    implementation(Dependencies.timber)
-
     // Compose Navigation-Navigation between various screens
     implementation(Dependencies.navigation)
 }

@@ -3,7 +3,6 @@ plugins {
     id("com.android.library")
     kotlin("plugin.serialization") version Versions.kotlinSerialization
     id("io.realm.kotlin") version Versions.realm
-    // id("de.jensklingenberg.cabret")
 }
 
 kotlin {
@@ -35,7 +34,7 @@ kotlin {
 
                 implementation(Dependencies.realm)
 
-                // implementation(Dependencies.cabretLog)
+                api(Dependencies.napier)
             }
         }
 
