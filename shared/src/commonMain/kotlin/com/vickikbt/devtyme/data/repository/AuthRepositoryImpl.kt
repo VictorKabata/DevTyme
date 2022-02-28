@@ -6,10 +6,8 @@ import com.vickikbt.devtyme.data.mappers.toDomain
 import com.vickikbt.devtyme.data.mappers.toEntity
 import com.vickikbt.devtyme.data.network.ApiService
 import com.vickikbt.devtyme.domain.models.AccessToken
-import io.github.aakira.napier.Napier
 import io.realm.RealmResults
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.first
 
 class AuthRepositoryImpl constructor(
     private val apiService: ApiService,
@@ -28,11 +26,8 @@ class AuthRepositoryImpl constructor(
     override suspend fun saveUserToken(accessToken: AccessTokenEntity) =
         accessTokenDao.saveToken(tokenEntity = accessToken)
 
-    override suspend fun getUserToken(): Flow<RealmResults<AccessTokenEntity>> {
-        val accessToken = accessTokenDao.getToken
-        Napier.e("Saved user token: ${accessToken.first()}")
-        return accessToken
-    }
+    override suspend fun getUserToken(): Flow<RealmResults<AccessTokenEntity>> =
+        accessTokenDao.getToken
 
     // override suspend fun deleteUserToken() = accessTokenDao.deleteToken()
 }
