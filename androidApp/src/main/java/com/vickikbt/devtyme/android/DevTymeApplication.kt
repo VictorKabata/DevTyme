@@ -3,10 +3,10 @@ package com.vickikbt.devtyme.android
 import android.app.Application
 import com.vickikbt.devtyme.android.di.presentationModule
 import com.vickikbt.devtyme.di.initKoin
+import com.vickikbt.devtyme.domain.utils.NapierInit
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.logger.Level
-import timber.log.Timber
 
 class DevTymeApplication : Application() {
 
@@ -22,8 +22,7 @@ class DevTymeApplication : Application() {
         }
 
         if (BuildConfig.DEBUG) {
-            Timber.plant(Timber.DebugTree())
-            // Napier.base()
+            NapierInit().init()
         }
     }
 }

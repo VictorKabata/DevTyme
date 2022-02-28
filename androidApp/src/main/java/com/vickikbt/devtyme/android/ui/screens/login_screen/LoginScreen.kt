@@ -3,7 +3,6 @@ package com.vickikbt.devtyme.android.ui.screens.login_screen
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import android.util.Log
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -29,8 +28,8 @@ import androidx.navigation.NavController
 import com.vickikbt.devtyme.android.R
 import com.vickikbt.devtyme.android.utils.findActivity
 import com.vickikbt.devtyme.domain.utils.Constants
+import io.github.aakira.napier.Napier
 import org.koin.androidx.compose.getViewModel
-import timber.log.Timber
 import java.util.*
 
 @Composable
@@ -103,13 +102,13 @@ fun onResume(context: Context, viewModel: LoginViewModel) {
         val code = uri.getQueryParameter("code")
 
         if (code != null) {
-            Log.e("VickiKbt", "Code: $code")
+            Napier.e("Code: $code")
             viewModel.fetchUserToken(code = code)
         } else uri.getQueryParameter("error")?.let {
-            Timber.e(RuntimeException(it))
+            Napier.e("Error: $it")
         }
     } else {
-        Timber.e("Nothing was returned")
+        Napier.e("Nothing was returned")
     }
 }
 

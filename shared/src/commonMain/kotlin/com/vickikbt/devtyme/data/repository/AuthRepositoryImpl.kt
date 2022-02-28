@@ -4,6 +4,7 @@ import com.vickikbt.devtyme.data.mappers.toDomain
 import com.vickikbt.devtyme.data.mappers.toEntity
 import com.vickikbt.devtyme.data.network.ApiService
 import com.vickikbt.devtyme.domain.models.AccessToken
+import io.github.aakira.napier.Napier
 
 class AuthRepositoryImpl constructor(
     private val apiService: ApiService
@@ -15,6 +16,8 @@ class AuthRepositoryImpl constructor(
         val responseEntity = responseDto?.toEntity()
 
         // saveUserToken(accessToken = responseEntity)
+
+        Napier.e("User token: ${responseEntity?.toDomain()}")
 
         return responseEntity?.toDomain()
     }
