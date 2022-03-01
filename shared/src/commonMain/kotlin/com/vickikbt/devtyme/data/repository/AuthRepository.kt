@@ -13,5 +13,5 @@ interface AuthRepository {
 
     suspend fun getUserToken(): Flow<RealmResults<AccessTokenEntity>>
 
-    // suspend fun deleteUserToken()
+    suspend fun deleteUserToken()
 }

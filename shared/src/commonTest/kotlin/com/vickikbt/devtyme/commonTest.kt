@@ -1,4 +1,4 @@
-package com.vickikbt.devtyme
+package com.vickikbt.devtyme // ktlint-disable filename
 
 import kotlin.test.Test
 

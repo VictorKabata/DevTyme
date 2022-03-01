@@ -29,5 +29,5 @@ class AuthRepositoryImpl constructor(
     override suspend fun getUserToken(): Flow<RealmResults<AccessTokenEntity>> =
         accessTokenDao.getToken
 
-    // override suspend fun deleteUserToken() = accessTokenDao.deleteToken()
+    override suspend fun deleteUserToken() = accessTokenDao.deleteToken()
 }
