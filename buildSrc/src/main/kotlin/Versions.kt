@@ -1,4 +1,17 @@
 object Versions {
+    // KMM Libs
+    const val ktor = "1.6.7"
+    const val kotlinSerialization = "1.6.10"
+    const val kotlinxSerialization = "1.2.2"
+    const val multiplatformPaging = "0.4.7"
+    const val okhttp = "5.0.0-alpha.2"
+    const val coroutinesKmm = "1.5.0-native-mt"
+    const val realm = "0.9.0"
+    const val napier = "2.4.0"
+
+    // KMM test libs
+    const val mockk="1.12.3"
+
     const val gradle = "7.1.1"
     const val kotlin = "1.6.10"
     const val detekt = "1.19.0"
@@ -23,20 +36,10 @@ object Versions {
     const val ratingBar = "1.1.1"
     const val splashScreen = "1.0.0-beta01"
 
-    const val ktor = "1.6.7"
-    const val kotlinSerialization = "1.6.10"
-    const val kotlinxSerialization = "1.2.2"
-    const val multiplatformPaging = "0.4.7"
-    const val okhttp = "5.0.0-alpha.2"
-    const val coroutinesKmm = "1.5.0-native-mt"
-
-    const val realm = "0.9.0"
-
-    const val napier = "2.4.0"
-
     const val jUnit = "4.13.2"
     const val truth = "1.1.3"
     const val coroutinesTest = "1.5.0"
     const val robolectic = "4.5.1"
     const val mockWebServer = "4.7.2"
+
 }

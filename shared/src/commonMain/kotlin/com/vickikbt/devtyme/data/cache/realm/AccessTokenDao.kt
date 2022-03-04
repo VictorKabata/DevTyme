@@ -24,7 +24,7 @@ class AccessTokenDao constructor(private val realm: Realm) {
      * Returns all data store in access token entity table in Realm database
      * as a flow
      */
-    val getToken = realm.query<AccessTokenEntity>().find().asFlow()
+    val getToken = realm.query<AccessTokenEntity>().first().asFlow()
 
     /**
      * Deletes all data in access token entity table in Realm database

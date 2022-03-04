@@ -21,26 +21,26 @@ kotlin {
         val commonMain by getting {
             dependencies {
 
-                implementation(Dependencies.coroutinesKmm)
+                implementation(KmmDependencies.coroutinesKmm)
 
-                implementation(Dependencies.koinCore)
+                implementation(KmmDependencies.koinCore)
 
-                implementation(Dependencies.kotlinxSerialization)
+                implementation(KmmDependencies.kotlinxSerialization)
 
-                implementation(Dependencies.ktorCore)
-                implementation(Dependencies.ktorSerialization)
-                implementation(Dependencies.ktorLogging)
-                implementation(Dependencies.ktorClientAuth)
+                implementation(KmmDependencies.ktorCore)
+                implementation(KmmDependencies.ktorSerialization)
+                implementation(KmmDependencies.ktorLogging)
+                implementation(KmmDependencies.ktorClientAuth)
 
-                implementation(Dependencies.realm)
+                implementation(KmmDependencies.realm)
 
-                api(Dependencies.napier)
+                api(KmmDependencies.napier)
             }
         }
 
         val androidMain by getting {
             dependencies {
-                implementation(Dependencies.ktorAndroid)
+                implementation(KmmDependencies.ktorAndroid)
             }
         }
 
@@ -52,13 +52,14 @@ kotlin {
             iosArm64Main.dependsOn(this)
 
             dependencies {
-                implementation(Dependencies.ktoriOS)
+                implementation(KmmDependencies.ktoriOS)
             }
         }
 
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test"))
+                implementation(KmmDependencies.mockk)
             }
         }
 

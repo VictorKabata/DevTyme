@@ -7,12 +7,8 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Button
-import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
+import androidx.compose.material.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -26,6 +22,7 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import androidx.navigation.NavController
 import com.vickikbt.devtyme.android.R
+import com.vickikbt.devtyme.android.ui.navigation.NavigationItem
 import com.vickikbt.devtyme.android.utils.findActivity
 import com.vickikbt.devtyme.domain.utils.Constants
 import io.github.aakira.napier.Napier
@@ -35,7 +32,14 @@ import java.util.*
 @Composable
 fun LoginScreen(navController: NavController, viewModel: LoginViewModel = getViewModel()) {
 
+    viewModel.getUserToken()
+
     val context = LocalContext.current
+
+    val userAccessToken by remember { mutableStateOf(viewModel.accessToken.value) }
+    val isLoading by remember { mutableStateOf(viewModel.isLoading.value) }
+
+    Napier.e("Access token: $$userAccessToken")
 
     ConstraintLayout(modifier = Modifier.fillMaxSize()) {
         val (imageLogo, buttonLogin) = createRefs()
@@ -63,7 +67,8 @@ fun LoginScreen(navController: NavController, viewModel: LoginViewModel = getVie
                 }
                 .padding(start = 32.dp, end = 32.dp, bottom = 32.dp),
             onClick = {
-                wakatimeOAuth(context = context)
+                if (userAccessToken?.accessToken.isNullOrEmpty()) wakatimeOAuth(context = context)
+                else navController.navigate(NavigationItem.Home.route)
             },
             contentPadding = PaddingValues(vertical = 8.dp),
             shape = RoundedCornerShape(4.dp),
@@ -72,15 +77,19 @@ fun LoginScreen(navController: NavController, viewModel: LoginViewModel = getVie
                 contentColor = MaterialTheme.colors.background
             )
         ) {
-            Text(
-                modifier = Modifier.align(Alignment.Bottom),
-                text = stringResource(R.string.title_login).uppercase(Locale.getDefault()),
-                fontSize = 16.sp,
-                style = MaterialTheme.typography.h6,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis,
-                textAlign = TextAlign.Center
-            )
+            if (isLoading) {
+                CircularProgressIndicator()
+            } else {
+                Text(
+                    modifier = Modifier.align(Alignment.Bottom),
+                    text = stringResource(R.string.title_login).uppercase(Locale.getDefault()),
+                    fontSize = 16.sp,
+                    style = MaterialTheme.typography.h6,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                    textAlign = TextAlign.Center
+                )
+            }
         }
     }
 
@@ -103,9 +112,7 @@ fun onResume(context: Context, viewModel: LoginViewModel) {
 
         if (code != null) {
             Napier.e("Code: $code")
-            viewModel.fetchUserToken(code = code).also {
-                viewModel.getUserToken()
-            }
+            viewModel.fetchUserToken(code = code)
         } else uri.getQueryParameter("error")?.let {
             Napier.e("Error: $it")
         }

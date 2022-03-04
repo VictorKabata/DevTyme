@@ -2,7 +2,7 @@ package com.vickikbt.devtyme.data.cache.realm.models
 
 import io.realm.RealmObject
 
-class AccessTokenEntity : RealmObject {
+open class AccessTokenEntity : RealmObject {
     var accessToken: String? = null
 
     var expiresIn: Double? = null

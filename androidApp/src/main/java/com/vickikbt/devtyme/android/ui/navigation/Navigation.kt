@@ -22,7 +22,7 @@ fun Navigation(navController: NavHostController) {
     // val slideDefaultInitialOffset = 1800
     // val slideDefaultTargetOffset = 1500
 
-    NavHost(navController = navController, startDestination = NavigationItem.Login.route) {
+    NavHost(navController = navController, startDestination = NavigationItem.Home.route) {
 
         composable(route = NavigationItem.Login.route) {
             LoginScreen(navController = navController)
