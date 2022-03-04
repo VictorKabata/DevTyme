@@ -15,6 +15,10 @@ class HomeViewModel constructor(private val authRepository: AuthRepository) : Vi
     private val _currentUser = MutableLiveData<CurrentUserDto?>()
     val currentUser: LiveData<CurrentUserDto?> get() = _currentUser
 
+    init {
+        getCurrentUserProfile()
+    }
+
     fun getCurrentUserProfile() {
         viewModelScope.launch {
             try {

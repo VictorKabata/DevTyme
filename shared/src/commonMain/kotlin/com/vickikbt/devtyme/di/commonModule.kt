@@ -11,11 +11,13 @@ import com.vickikbt.devtyme.domain.models.AccessToken
 import com.vickikbt.devtyme.domain.repositories.AuthRepository
 import io.github.aakira.napier.Napier
 import io.ktor.client.*
+import io.ktor.client.features.*
 import io.ktor.client.features.auth.*
 import io.ktor.client.features.auth.providers.*
 import io.ktor.client.features.json.*
 import io.ktor.client.features.json.serializer.*
 import io.ktor.client.features.logging.*
+import io.ktor.client.request.*
 import io.realm.Configuration
 import io.realm.Realm
 import io.realm.RealmConfiguration
@@ -33,8 +35,12 @@ val commonModule = module {
         val token = provideToken(accessTokenDao = get())
 
         HttpClient {
+            defaultRequest {
+                header("Authorization", token?.accessToken ?: "")
+            }
+
             install(Logging) {
-                level = LogLevel.ALL
+                level = LogLevel.HEADERS
                 logger = object : Logger {
                     override fun log(message: String) {
                         Napier.e(tag = "Http Client", message = message)
@@ -51,14 +57,14 @@ val commonModule = module {
                 )
             }
 
-            install(Auth) {
+            /*install(Auth) {
                 bearer {
                     BearerTokens(
                         accessToken = token?.accessToken ?: "",
                         refreshToken = token?.refreshToken ?: ""
                     )
                 }
-            }
+            }*/
         }
     }
     single<ApiService> { ApiServiceImpl(httpClient = get()) }
