@@ -23,7 +23,6 @@ fun HomeScreen(navController: NavController, viewModel: HomeViewModel = getViewM
     }
 
     val currentUserProfile by remember { mutableStateOf(viewModel.currentUser) }
-    Napier.e("Current user: ${currentUserProfile.value}")
 
     Column {
         Text(
