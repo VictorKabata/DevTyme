@@ -16,16 +16,21 @@ class HomeViewModel constructor(private val authRepository: AuthRepository) : Vi
     private val _currentUser: MutableState<CurrentUserDto?> = mutableStateOf(null)
     val currentUser: State<CurrentUserDto?> get() = _currentUser
 
+    private val _isLoading: MutableState<Boolean> = mutableStateOf(false)
+    val isLoading: State<Boolean> get() = _isLoading
+
+    private val _errorMessage: MutableState<String> = mutableStateOf("Unknown error")
+    val errorMessage: State<String> get() = _errorMessage
+
     fun getCurrentUserProfile() {
         viewModelScope.launch {
             try {
                 val response = authRepository.getUserProfile()
                 response.collectLatest {
                     _currentUser.value = it
-                    Napier.e("Current user in viewmodel: $it")
                 }
             } catch (e: Exception) {
-                Napier.e("Error: ${e.localizedMessage}")
+                _errorMessage.value = e.localizedMessage
             }
         }
     }

@@ -32,14 +32,16 @@ import java.util.*
 @Composable
 fun LoginScreen(navController: NavController, viewModel: LoginViewModel = getViewModel()) {
 
-    viewModel.getUserToken()
+    LaunchedEffect(key1 = true) {
+        viewModel.getUserToken()
+    }
 
     val context = LocalContext.current
 
-    val userAccessToken by remember { mutableStateOf(viewModel.accessToken.value) }
+    val userAccessToken by remember { mutableStateOf(viewModel.accessToken) }
     val isLoading by remember { mutableStateOf(viewModel.isLoading.value) }
 
-    Napier.e("Access token: $$userAccessToken")
+    Napier.e("Is Loading: $isLoading")
 
     ConstraintLayout(modifier = Modifier.fillMaxSize()) {
         val (imageLogo, buttonLogin) = createRefs()
@@ -67,7 +69,7 @@ fun LoginScreen(navController: NavController, viewModel: LoginViewModel = getVie
                 }
                 .padding(start = 32.dp, end = 32.dp, bottom = 32.dp),
             onClick = {
-                if (userAccessToken?.accessToken.isNullOrEmpty()) wakatimeOAuth(context = context)
+                if (userAccessToken.value?.accessToken.isNullOrEmpty()) wakatimeOAuth(context = context)
                 else navController.navigate(NavigationItem.Home.route)
             },
             contentPadding = PaddingValues(vertical = 8.dp),

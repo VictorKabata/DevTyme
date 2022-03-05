@@ -18,12 +18,13 @@ import java.util.*
 @Composable
 fun HomeScreen(navController: NavController, viewModel: HomeViewModel = getViewModel()) {
 
-    LaunchedEffect(key1 = true ){
+    LaunchedEffect(key1 = true) {
         viewModel.getCurrentUserProfile()
     }
 
     val currentUserProfile by remember { mutableStateOf(viewModel.currentUser) }
-    Napier.e("Current user: $currentUserProfile")
+    Napier.e("Current user: ${currentUserProfile.value}")
+
     Column {
         Text(
             text = stringResource(R.string.title_home).uppercase(Locale.getDefault()),

@@ -21,7 +21,10 @@ class AuthRepositoryImpl constructor(
         val responseDto = apiService.fetchUserToken(code = code)
         val responseEntity = responseDto?.toEntity()
 
-        responseEntity?.let { saveUserToken(accessToken = it) }
+        responseEntity?.let {
+            deleteUserToken()
+            saveUserToken(accessToken = it)
+        }
     }
 
     override suspend fun saveUserToken(accessToken: AccessTokenEntity) =

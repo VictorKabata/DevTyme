@@ -74,7 +74,11 @@ val commonModule = module {
      * provided to DAOs through constructor injection
      */
     single<Configuration> {
-        RealmConfiguration.Builder().name("devtyme.db").schema(setOf(AccessTokenEntity::class))
+        RealmConfiguration.Builder()
+            .name("devtyme.db")
+            .deleteRealmIfMigrationNeeded()
+            .schemaVersion(schemaVersion = 1)
+            .schema(setOf(AccessTokenEntity::class))
             .build()
     }
     single { Realm.open(configuration = get()) }
