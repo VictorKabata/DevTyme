@@ -12,8 +12,6 @@ import com.vickikbt.devtyme.domain.repositories.AuthRepository
 import io.github.aakira.napier.Napier
 import io.ktor.client.*
 import io.ktor.client.features.*
-import io.ktor.client.features.auth.*
-import io.ktor.client.features.auth.providers.*
 import io.ktor.client.features.json.*
 import io.ktor.client.features.json.serializer.*
 import io.ktor.client.features.logging.*
@@ -36,7 +34,7 @@ val commonModule = module {
 
         HttpClient {
             defaultRequest {
-                header("Authorization", token?.accessToken ?: "")
+                header("Authorization", "Bearer ${token?.accessToken}")
             }
 
             install(Logging) {
