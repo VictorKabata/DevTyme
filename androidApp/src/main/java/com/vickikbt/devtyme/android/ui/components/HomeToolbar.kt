@@ -7,7 +7,6 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -48,7 +47,7 @@ fun HomeToolbar(
 
             Text(
                 text = subTitle,
-                color = Color(android.graphics.Color.parseColor("#808080")),
+                color = MaterialTheme.colors.onPrimary,
                 fontSize = 14.sp,
                 style = MaterialTheme.typography.body1,
                 maxLines = 1,
