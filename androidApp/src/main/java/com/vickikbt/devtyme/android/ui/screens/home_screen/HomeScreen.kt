@@ -45,10 +45,7 @@ fun HomeScreen(navController: NavController, viewModel: HomeViewModel = getViewM
                     .height(56.dp),
                 dates = tabItems,
                 selectedTab = selectedDate,
-                onTabItemClick = {
-                    selectedDate = it
-                    Napier.e("Selected position: $it")
-                }
+                onTabItemClick = { selectedDate = it }
             )
 
             //endregion
