@@ -4,8 +4,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.material.Scaffold
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -23,8 +22,7 @@ fun HomeScreen(navController: NavController, viewModel: HomeViewModel = getViewM
     }
 
     val currentUserProfile = viewModel.currentUser.observeAsState().value
-
-    var selectedDate: Int? = null
+    var selectedDate by remember { mutableStateOf(0) }
 
     Napier.e("Current user profile: $currentUserProfile")
 
