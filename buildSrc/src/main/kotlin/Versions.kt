@@ -3,9 +3,10 @@ object Versions {
     const val ktor = "1.6.7"
     const val kotlinSerialization = "1.6.10"
     const val kotlinxSerialization = "1.2.2"
-    const val coroutinesKmm = "1.6.0"
+    const val kotlinxCoroutines = "1.6.0"
     const val realm = "0.9.0"
     const val napier = "2.4.0"
+    const val kotlinxDateTime = "0.3.2"
 
     // KMM test libs
     const val mockk = "1.12.3"

@@ -21,7 +21,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
 
-                implementation(KmmDependencies.coroutinesKmm)
+                implementation(KmmDependencies.kotlinxCoroutines)
 
                 implementation(KmmDependencies.koinCore)
 
@@ -35,6 +35,8 @@ kotlin {
                 implementation(KmmDependencies.realm)
 
                 api(KmmDependencies.napier)
+
+                implementation(KmmDependencies.kotlinxDateTime)
             }
         }
 
