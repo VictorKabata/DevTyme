@@ -1,6 +1,7 @@
 package com.vickikbt.devtyme.data.network
 
 import com.vickikbt.devtyme.data.network.models.AccessTokenDto
+import com.vickikbt.devtyme.data.network.models.CurrentUserDto
 import com.vickikbt.devtyme.domain.utils.Constants
 import io.ktor.client.*
 import io.ktor.client.features.*
@@ -23,6 +24,24 @@ class ApiServiceImpl constructor(private val httpClient: HttpClient) : ApiServic
                     }
                 )
             }
+        } catch (e: ServerResponseException) {
+            println("500 error: ${e.message}")
+            null
+        } catch (e: ClientRequestException) {
+            println("400 error: ${e.message}")
+            null
+        } catch (e: RedirectResponseException) {
+            println("300 error: ${e.message}")
+            null
+        } catch (e: Exception) {
+            println("Error: ${e.message}")
+            null
+        }
+    }
+
+    override suspend fun getCurrentUser(): CurrentUserDto? {
+        return try {
+            httpClient.get<CurrentUserDto>(urlString = "https://wakatime.com/api/v1/users/current")
         } catch (e: ServerResponseException) {
             println("500 error: ${e.message}")
             null
