@@ -12,9 +12,6 @@ import kotlinx.coroutines.launch
 
 class LoginViewModel constructor(private val authRepository: AuthRepository) : ViewModel() {
 
-    private val _accessToken: MutableState<AccessToken?> = mutableStateOf(null)
-    val accessToken: State<AccessToken?> get() = _accessToken
-
     private val _isLoading: MutableState<Boolean> = mutableStateOf(false)
     val isLoading: State<Boolean> get() = _isLoading
 
@@ -26,21 +23,6 @@ class LoginViewModel constructor(private val authRepository: AuthRepository) : V
         viewModelScope.launch {
             try {
                 authRepository.fetchUserToken(code)
-            } catch (e: Exception) {
-                _errorMessage.value = e.localizedMessage
-            }
-        }
-        _isLoading.value = false
-    }
-
-    fun getUserToken() {
-        _isLoading.value = true
-        viewModelScope.launch {
-            try {
-                val response = authRepository.getUserToken()
-                response.collectLatest {
-                    _accessToken.value = it
-                }
             } catch (e: Exception) {
                 _errorMessage.value = e.localizedMessage
             }

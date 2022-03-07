@@ -8,10 +8,14 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.tooling.preview.Preview
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.vickikbt.devtyme.android.ui.navigation.Navigation
 import com.vickikbt.devtyme.android.ui.theme.DevTymeTheme
+import org.koin.androidx.compose.getViewModel
 
 @ExperimentalMaterialApi
 @ExperimentalFoundationApi
@@ -35,13 +39,14 @@ class MainActivity : ComponentActivity() {
 @ExperimentalFoundationApi
 @ExperimentalAnimationApi
 @Composable
-private fun MainScreen() {
+private fun MainScreen(viewModel: MainActivityViewModel = getViewModel()) {
     val navController = rememberAnimatedNavController()
+    val userAccessToken by remember { mutableStateOf(viewModel.accessToken) }
 
     Scaffold(
         bottomBar = {}
     ) {
-        Navigation(navController = navController)
+        Navigation(navController = navController, isLoggedIn = !userAccessToken.value?.accessToken.isNullOrEmpty())
     }
 }
 
