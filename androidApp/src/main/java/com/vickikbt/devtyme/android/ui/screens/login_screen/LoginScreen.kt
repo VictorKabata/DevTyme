@@ -33,9 +33,9 @@ fun LoginScreen(navController: NavController, viewModel: LoginViewModel = getVie
 
     val context = LocalContext.current
 
-    val isLoading by remember { mutableStateOf(viewModel.isLoading.value) }
+    val isLoading by remember { mutableStateOf(viewModel.isLoading) }
 
-    Napier.e("Is Loading: $isLoading")
+    Napier.e("Is loading: ${isLoading.value}")
 
     ConstraintLayout(modifier = Modifier.fillMaxSize()) {
         val (imageLogo, buttonLogin) = createRefs()
@@ -70,7 +70,7 @@ fun LoginScreen(navController: NavController, viewModel: LoginViewModel = getVie
                 contentColor = MaterialTheme.colors.background
             )
         ) {
-            if (isLoading) {
+            if (isLoading.value) {
                 CircularProgressIndicator()
             } else {
                 Text(

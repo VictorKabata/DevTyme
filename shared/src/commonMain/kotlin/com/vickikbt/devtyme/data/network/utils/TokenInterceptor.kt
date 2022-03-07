@@ -10,6 +10,7 @@ class TokenInterceptor : KoinComponent {
 
     private val accessTokenDao: AccessTokenDao by inject()
 
-    operator fun invoke() =
-        runBlocking { "Bearer ${accessTokenDao.getToken.first()?.accessToken ?: ""}" }
+    operator fun invoke() = runBlocking {
+        "Bearer ${accessTokenDao.getToken.first()?.accessToken ?: ""}"
+    }
 }
