@@ -14,6 +14,7 @@ object Versions {
     const val gradle = "7.1.1"
     const val kotlin = "1.6.10"
     const val detekt = "1.19.0"
+    const val desugaring="1.1.5"
 
     const val androidCore = "1.7.0"
     const val appCompat = "1.4.1"
