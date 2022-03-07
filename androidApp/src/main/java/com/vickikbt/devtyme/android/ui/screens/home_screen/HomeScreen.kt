@@ -19,9 +19,11 @@ fun HomeScreen(navController: NavController, viewModel: HomeViewModel = getViewM
 
     LaunchedEffect(key1 = true) {
         viewModel.getCurrentUserProfile()
+        viewModel.getTimeOfDay()
     }
 
     val currentUserProfile = viewModel.currentUser.observeAsState().value
+    val greetingMessage = viewModel.greetingMessage.observeAsState().value
     var selectedDate by remember { mutableStateOf(0) }
 
     Napier.e("Current user profile: $currentUserProfile")
@@ -29,7 +31,7 @@ fun HomeScreen(navController: NavController, viewModel: HomeViewModel = getViewM
     Scaffold(
         topBar = {
             HomeToolbar(
-                title = "Hey, ${currentUserProfile?.user?.displayName ?: currentUserProfile?.user?.username}",
+                title = "$greetingMessage ${currentUserProfile?.user?.displayName ?: currentUserProfile?.user?.username}",
                 subTitle = "Let's make this day productive",
                 profileImageUrl = currentUserProfile?.user?.photo ?: ""
             )

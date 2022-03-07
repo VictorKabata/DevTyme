@@ -10,5 +10,5 @@ val presentationModule = module {
 
     viewModel { MainActivityViewModel(authRepository = get()) }
     viewModel { LoginViewModel(authRepository = get()) }
-    viewModel { HomeViewModel(authRepository = get()) }
+    viewModel { HomeViewModel(authRepository = get(), dateTimeRepository = get()) }
 }
