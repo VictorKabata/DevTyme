@@ -15,14 +15,12 @@ import com.vickikbt.devtyme.android.ui.screens.webview_screen.WebViewScreen
 @ExperimentalAnimationApi
 @ExperimentalMaterialApi
 @Composable
-fun Navigation(navController: NavHostController) {
+fun Navigation(navController: NavHostController, isLoggedIn: Boolean) {
 
-    // val defaultEnterAnimationDuration = 600
-    // val defaultExitAnimationDuration = 1100
-    // val slideDefaultInitialOffset = 1800
-    // val slideDefaultTargetOffset = 1500
-
-    NavHost(navController = navController, startDestination = NavigationItem.Login.route) {
+    NavHost(
+        navController = navController,
+        startDestination = if (isLoggedIn) NavigationItem.Home.route else NavigationItem.Login.route
+    ) {
 
         composable(route = NavigationItem.Login.route) {
             LoginScreen(navController = navController)
