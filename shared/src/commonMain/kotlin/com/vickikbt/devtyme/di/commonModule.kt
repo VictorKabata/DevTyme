@@ -19,8 +19,10 @@ import io.ktor.client.request.*
 import io.realm.Configuration
 import io.realm.Realm
 import io.realm.RealmConfiguration
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.launch
 import org.koin.dsl.module
 
 val commonModule = module {
@@ -54,15 +56,6 @@ val commonModule = module {
                     }
                 )
             }
-
-            /*install(Auth) {
-                bearer {
-                    BearerTokens(
-                        accessToken = token?.accessToken ?: "",
-                        refreshToken = token?.refreshToken ?: ""
-                    )
-                }
-            }*/
         }
     }
     single<ApiService> { ApiServiceImpl(httpClient = get()) }
@@ -88,6 +81,10 @@ val commonModule = module {
 }
 
 private fun provideToken(accessTokenDao: AccessTokenDao): AccessToken? {
-    val token = runBlocking { accessTokenDao.getToken.first() }
-    return token?.toDomain()
+    var token: AccessToken? = null
+    CoroutineScope(Dispatchers.Default).launch {
+        token = accessTokenDao.getToken.first()?.toDomain()
+    }
+
+    return token
 }

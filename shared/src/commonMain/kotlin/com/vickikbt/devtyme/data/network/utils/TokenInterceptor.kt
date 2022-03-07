@@ -1,12 +1,26 @@
 package com.vickikbt.devtyme.data.network.utils
 
 import com.vickikbt.devtyme.data.cache.realm.AccessTokenDao
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.runBlocking
 
 class TokenInterceptor constructor(private val accessTokenDao: AccessTokenDao) {
 
-    val accessToken = runBlocking { accessTokenDao.getToken.first()?.accessToken }
+    private var token: String? = null
 
-    operator fun invoke() = accessToken ?: ""
+    init {
+    }
+
+    fun accessToken() = CoroutineScope(Dispatchers.Default).async {
+        val response = accessTokenDao.getToken.first()?.accessToken
+        token = response
+
+        return@async response
+    }
+
+    suspend operator fun invoke() = CoroutineScope(Dispatchers.Default).async {
+        return@async accessToken().await() ?: ""
+    }.await()
 }
