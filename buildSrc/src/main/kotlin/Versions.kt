@@ -3,14 +3,12 @@ object Versions {
     const val ktor = "1.6.7"
     const val kotlinSerialization = "1.6.10"
     const val kotlinxSerialization = "1.2.2"
-    const val multiplatformPaging = "0.4.7"
-    const val okhttp = "5.0.0-alpha.2"
     const val coroutinesKmm = "1.5.0-native-mt"
     const val realm = "0.9.0"
     const val napier = "2.4.0"
 
     // KMM test libs
-    const val mockk="1.12.3"
+    const val mockk = "1.12.3"
 
     const val gradle = "7.1.1"
     const val kotlin = "1.6.10"
@@ -30,10 +28,8 @@ object Versions {
     const val koin = "3.1.2"
     const val navigation = "2.4.0-alpha02"
     const val coil = "1.4.0"
-    const val timber = "5.0.1"
     const val coroutines = "1.5.2"
     const val firebaseBOM = "29.0.3"
-    const val ratingBar = "1.1.1"
     const val splashScreen = "1.0.0-beta01"
 
     const val jUnit = "4.13.2"
@@ -41,5 +37,4 @@ object Versions {
     const val coroutinesTest = "1.5.0"
     const val robolectic = "4.5.1"
     const val mockWebServer = "4.7.2"
-
 }
