@@ -22,7 +22,6 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import androidx.navigation.NavController
 import com.vickikbt.devtyme.android.R
-import com.vickikbt.devtyme.android.ui.navigation.NavigationItem
 import com.vickikbt.devtyme.android.utils.findActivity
 import com.vickikbt.devtyme.domain.utils.Constants
 import io.github.aakira.napier.Napier
@@ -32,16 +31,11 @@ import java.util.*
 @Composable
 fun LoginScreen(navController: NavController, viewModel: LoginViewModel = getViewModel()) {
 
-    LaunchedEffect(key1 = true) {
-        viewModel.getUserToken()
-    }
-
     val context = LocalContext.current
 
-    val userAccessToken by remember { mutableStateOf(viewModel.accessToken) }
-    val isLoading by remember { mutableStateOf(viewModel.isLoading.value) }
+    val isLoading by remember { mutableStateOf(viewModel.isLoading) }
 
-    Napier.e("Is Loading: $isLoading")
+    Napier.e("Is loading: ${isLoading.value}")
 
     ConstraintLayout(modifier = Modifier.fillMaxSize()) {
         val (imageLogo, buttonLogin) = createRefs()
@@ -68,10 +62,7 @@ fun LoginScreen(navController: NavController, viewModel: LoginViewModel = getVie
                     end.linkTo(parent.end)
                 }
                 .padding(start = 32.dp, end = 32.dp, bottom = 32.dp),
-            onClick = {
-                if (userAccessToken.value?.accessToken.isNullOrEmpty()) wakatimeOAuth(context = context)
-                else navController.navigate(NavigationItem.Home.route)
-            },
+            onClick = { wakatimeOAuth(context = context) },
             contentPadding = PaddingValues(vertical = 8.dp),
             shape = RoundedCornerShape(4.dp),
             colors = ButtonDefaults.buttonColors(
@@ -79,7 +70,7 @@ fun LoginScreen(navController: NavController, viewModel: LoginViewModel = getVie
                 contentColor = MaterialTheme.colors.background
             )
         ) {
-            if (isLoading) {
+            if (isLoading.value) {
                 CircularProgressIndicator()
             } else {
                 Text(
