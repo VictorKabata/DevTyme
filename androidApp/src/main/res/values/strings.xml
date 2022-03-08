@@ -4,4 +4,5 @@
     <string name="title_home">Home</string>
     <string name="title_webview">Webview</string>
     <string name="profile_image">Profile image</string>
+    <string name="title_daily_goal">Daily Goal</string>
 </resources>
