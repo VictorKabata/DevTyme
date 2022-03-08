@@ -21,6 +21,9 @@ class HomeViewModel constructor(
     private val _greetingMessage = MutableLiveData<String>()
     val greetingMessage: LiveData<String> get() = _greetingMessage
 
+    private val _daysOfWeek = MutableLiveData<List<String>>()
+    val daysOfWeek: LiveData<List<String>> get() = _daysOfWeek
+
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> get() = _isLoading
 
@@ -45,6 +48,18 @@ class HomeViewModel constructor(
             try {
                 dateTimeRepository.getTimeOfDay().collectLatest {
                     _greetingMessage.value = it
+                }
+            } catch (e: Exception) {
+                _errorMessage.value = e.localizedMessage
+            }
+        }
+    }
+
+    fun getDaysOfWeek() {
+        viewModelScope.launch {
+            try {
+                dateTimeRepository.getDaysOfWeek().collectLatest {
+                    _daysOfWeek.value = it
                 }
             } catch (e: Exception) {
                 _errorMessage.value = e.localizedMessage

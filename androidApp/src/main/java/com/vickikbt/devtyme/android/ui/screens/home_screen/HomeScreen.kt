@@ -20,13 +20,18 @@ fun HomeScreen(navController: NavController, viewModel: HomeViewModel = getViewM
     LaunchedEffect(key1 = true) {
         viewModel.getCurrentUserProfile()
         viewModel.getTimeOfDay()
+        viewModel.getDaysOfWeek()
     }
 
     val currentUserProfile = viewModel.currentUser.observeAsState().value
     val greetingMessage = viewModel.greetingMessage.observeAsState().value
+    val daysOfWeek = viewModel.daysOfWeek.observeAsState().value
+
     var selectedDate by remember { mutableStateOf(0) }
 
-    Napier.e("Current user profile: $currentUserProfile")
+    daysOfWeek?.forEach {
+        Napier.e("Days of week: $it")
+    }
 
     Scaffold(
         topBar = {
