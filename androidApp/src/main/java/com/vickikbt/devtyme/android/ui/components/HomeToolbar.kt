@@ -27,14 +27,20 @@ fun HomeToolbar(
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .width(56.dp)
             .background(MaterialTheme.colors.primary)
             .padding(start = 16.dp, top = 4.dp, end = 8.dp),
-        verticalAlignment = Alignment.CenterVertically
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceBetween
     ) {
 
         //region Title and Subtitle
-        Column(modifier = Modifier.weight(.8f)) {
+        Column(
+            modifier = Modifier.weight(.8f),
+            verticalArrangement = Arrangement.SpaceBetween,
+            horizontalAlignment = Alignment.Start
+        ) {
+            Spacer(modifier = Modifier.height(4.dp))
+
             Text(
                 text = title,
                 color = MaterialTheme.colors.onPrimary,
@@ -45,6 +51,8 @@ fun HomeToolbar(
                 textAlign = TextAlign.Start
             )
 
+            Spacer(modifier = Modifier.height(2.dp))
+
             Text(
                 text = subTitle,
                 color = MaterialTheme.colors.onPrimary,
@@ -54,6 +62,8 @@ fun HomeToolbar(
                 overflow = TextOverflow.Ellipsis,
                 textAlign = TextAlign.Start
             )
+
+            Spacer(modifier = Modifier.height(2.dp))
         }
         //endregion
 

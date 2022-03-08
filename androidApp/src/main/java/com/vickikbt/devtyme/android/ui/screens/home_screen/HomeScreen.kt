@@ -3,6 +3,7 @@ package com.vickikbt.devtyme.android.ui.screens.home_screen
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
@@ -36,7 +37,7 @@ fun HomeScreen(navController: NavController, viewModel: HomeViewModel = getViewM
     Scaffold(
         topBar = {
             HomeToolbar(
-                title = "$greetingMessage ${currentUserProfile?.user?.displayName ?: currentUserProfile?.user?.username}",
+                title = "$greetingMessage ${currentUserProfile?.user?.displayName?.substringBefore(" ")?.trim() ?: currentUserProfile?.user?.username}",
                 subTitle = "Let's make this day productive",
                 profileImageUrl = currentUserProfile?.user?.photo ?: ""
             )
@@ -49,7 +50,8 @@ fun HomeScreen(navController: NavController, viewModel: HomeViewModel = getViewM
             DatesTabs(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(56.dp),
+                    .height(56.dp)
+                    .padding(bottom = 2.dp),
                 dates = tabItems,
                 selectedTab = selectedDate,
                 onTabItemClick = { selectedDate = it }
