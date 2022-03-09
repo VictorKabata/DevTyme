@@ -231,17 +231,48 @@ fun HomeScreen(navController: NavController, viewModel: HomeViewModel = getViewM
                 )
 
                 Column(modifier = Modifier, verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                    ItemProjectOverview(title = "DevTyme", hours = "4hrs 20mins")
-                    ItemProjectOverview(title = "Notflix", hours = "4hrs 20mins")
+                    ItemProjectOverview(title = "Design", hours = "4hrs 20mins")
+                    ItemProjectOverview(title = "Coding", hours = "6hrs 90mins")
                 }
                 //endregion
 
                 //region Projects
+                Spacer(modifier = Modifier.height(12.dp))
 
+                Text(
+                    text = stringResource(R.string.title_projects),
+                    color = MaterialTheme.colors.onSurface,
+                    fontSize = 24.sp,
+                    style = MaterialTheme.typography.h6,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                    textAlign = TextAlign.Start
+                )
+
+                Column(modifier = Modifier, verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                    ItemProjectOverview(title = "DevTyme", hours = "4hrs 20mins")
+                    ItemProjectOverview(title = "Notflix", hours = "6hrs 90mins")
+                }
                 //endregion
 
                 //region Languages
+                Spacer(modifier = Modifier.height(12.dp))
 
+                Text(
+                    text = stringResource(R.string.title_languages),
+                    color = MaterialTheme.colors.onSurface,
+                    fontSize = 24.sp,
+                    style = MaterialTheme.typography.h6,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                    textAlign = TextAlign.Start
+                )
+
+                Column(modifier = Modifier, verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                    ItemProjectOverview(title = "Kotlin", hours = "4hrs 20mins")
+                    ItemProjectOverview(title = "Golang", hours = "6hrs 90mins")
+                    ItemProjectOverview(title = "Java", hours = "6hrs 90mins")
+                }
                 //endregion
             }
         }
