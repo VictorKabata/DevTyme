@@ -19,6 +19,10 @@ class DateTimeRepositoryImpl : DateTimeRepository {
         }
     }
 
+    override fun getCurrentDate(): Flow<String> {
+        return flowOf(Clock.System.now().toString())
+    }
+
     override fun getDaysOfWeek(): Flow<List<String>> {
         val today = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()).date
         val days = mutableListOf<LocalDate>()

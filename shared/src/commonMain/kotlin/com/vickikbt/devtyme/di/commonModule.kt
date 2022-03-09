@@ -4,11 +4,13 @@ import com.vickikbt.devtyme.data.cache.realm.AccessTokenDao
 import com.vickikbt.devtyme.data.cache.realm.models.AccessTokenEntity
 import com.vickikbt.devtyme.data.data_sources.AuthRepositoryImpl
 import com.vickikbt.devtyme.data.data_sources.DateTimeRepositoryImpl
+import com.vickikbt.devtyme.data.data_sources.SummariesRepositoryImpl
 import com.vickikbt.devtyme.data.network.ApiService
 import com.vickikbt.devtyme.data.network.ApiServiceImpl
 import com.vickikbt.devtyme.data.network.utils.TokenInterceptor
 import com.vickikbt.devtyme.domain.repositories.AuthRepository
 import com.vickikbt.devtyme.domain.repositories.DateTimeRepository
+import com.vickikbt.devtyme.domain.repositories.SummariesRepository
 import io.github.aakira.napier.Napier
 import io.ktor.client.*
 import io.ktor.client.features.*
@@ -72,4 +74,5 @@ val commonModule = module {
 
     single<AuthRepository> { AuthRepositoryImpl(apiService = get(), accessTokenDao = get()) }
     single<DateTimeRepository> { DateTimeRepositoryImpl() }
+    single<SummariesRepository> { SummariesRepositoryImpl(apiService = get()) }
 }

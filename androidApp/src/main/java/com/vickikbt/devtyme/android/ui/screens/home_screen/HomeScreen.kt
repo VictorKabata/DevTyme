@@ -35,11 +35,14 @@ fun HomeScreen(navController: NavController, viewModel: HomeViewModel = getViewM
         viewModel.getCurrentUserProfile()
         viewModel.getTimeOfDay()
         viewModel.getDaysOfWeek()
+        viewModel.getSummaries()
     }
 
     val currentUserProfile = viewModel.currentUser.observeAsState().value
     val greetingMessage = viewModel.greetingMessage.observeAsState().value
+    val currentDate = viewModel.currentDate.observeAsState().value
     val daysOfWeek = viewModel.daysOfWeek.observeAsState().value
+    val summaries = viewModel.summaries.observeAsState().value?.summary?.get(0)
 
     var selectedDate by remember { mutableStateOf(0) }
     val scrollState: ScrollState = rememberScrollState()
@@ -165,7 +168,7 @@ fun HomeScreen(navController: NavController, viewModel: HomeViewModel = getViewM
                                 end.linkTo(linearProgressIndicator.end)
                                 width = Dimension.fillToConstraints
                             },
-                            text = "Worked 6hrs out of 8hrs",
+                            text = "Worked ${summaries?.grandTotal?.hours}hrs out of 8hrs",
                             color = MaterialTheme.colors.onSurface,
                             fontSize = 13.sp,
                             style = MaterialTheme.typography.h4,
@@ -186,9 +189,9 @@ fun HomeScreen(navController: NavController, viewModel: HomeViewModel = getViewM
                                     end.linkTo(imageProgress.start)
                                     width = Dimension.fillToConstraints
                                 },
-                            progress = .5f,
+                            progress = (summaries?.grandTotal?.hours ?: 0.1 / 8).toFloat(),
                             color = MaterialTheme.colors.secondary,
-                            backgroundColor = MaterialTheme.colors.primary.copy(.2f)
+                            backgroundColor = MaterialTheme.colors.primary.copy(.2f),
                         )
                     }
                 }
