@@ -2,7 +2,7 @@ package com.vickikbt.devtyme.data.network
 
 import com.vickikbt.devtyme.data.network.models.AccessTokenDto
 import com.vickikbt.devtyme.data.network.models.CurrentUserDto
-import com.vickikbt.devtyme.domain.models.Summaries
+import com.vickikbt.devtyme.data.network.models.SummariesDto
 
 interface ApiService {
 
@@ -10,5 +10,5 @@ interface ApiService {
 
     suspend fun getCurrentUser(): CurrentUserDto?
 
-    suspend fun fetchSummaries(start: String? = null, range: String? = null): Summaries?
+    suspend fun fetchSummaries(start: String? = null, range: String? = null): SummariesDto?
 }
