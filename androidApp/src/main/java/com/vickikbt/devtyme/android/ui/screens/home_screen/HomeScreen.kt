@@ -59,14 +59,14 @@ fun HomeScreen(navController: NavController, viewModel: HomeViewModel = getViewM
         Column {
 
             //region Dates Tabs
-            val tabItems = listOf("S\n11", "M\n12", "T\n13", "W\n14", "T\n15", "F\n16", "S\n17")
-
-            DatesTabs(
-                modifier = Modifier.fillMaxWidth(),
-                dates = tabItems,
-                selectedTab = selectedDate,
-                onTabItemClick = { selectedDate = it }
-            )
+            daysOfWeek?.let {
+                DatesTabs(
+                    modifier = Modifier.fillMaxWidth(),
+                    dates = it,
+                    selectedTab = selectedDate,
+                    onTabItemClick = { selectedDate = it }
+                )
+            }
             //endregion
 
             Column(
