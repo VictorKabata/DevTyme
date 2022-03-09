@@ -1,6 +1,5 @@
 package com.vickikbt.devtyme.android.ui.screens.home_screen
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -11,7 +10,6 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -20,6 +18,10 @@ import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import androidx.navigation.NavController
+import com.airbnb.lottie.compose.LottieAnimation
+import com.airbnb.lottie.compose.LottieCompositionSpec
+import com.airbnb.lottie.compose.animateLottieCompositionAsState
+import com.airbnb.lottie.compose.rememberLottieComposition
 import com.vickikbt.devtyme.android.R
 import com.vickikbt.devtyme.android.ui.components.DatesTabs
 import com.vickikbt.devtyme.android.ui.components.HomeToolbar
@@ -41,6 +43,15 @@ fun HomeScreen(navController: NavController, viewModel: HomeViewModel = getViewM
 
     var selectedDate by remember { mutableStateOf(0) }
     val scrollState: ScrollState = rememberScrollState()
+
+    val lottieAnimation =
+        rememberLottieComposition(spec = LottieCompositionSpec.RawRes(R.raw.trophy))
+    val lottieAnimationSpec = animateLottieCompositionAsState(
+        composition = lottieAnimation.value,
+        isPlaying = true,
+        iterations = 6,
+        speed = 1.0f
+    )
 
     Scaffold(
         topBar = {
@@ -135,7 +146,7 @@ fun HomeScreen(navController: NavController, viewModel: HomeViewModel = getViewM
                             textAlign = TextAlign.Start
                         )
 
-                        Image(
+                        LottieAnimation(
                             modifier = Modifier
                                 .size(130.dp)
                                 .constrainAs(imageProgress) {
@@ -143,8 +154,8 @@ fun HomeScreen(navController: NavController, viewModel: HomeViewModel = getViewM
                                     end.linkTo(parent.end)
                                     bottom.linkTo(parent.bottom)
                                 },
-                            painter = painterResource(id = R.drawable.ic_launcher_foreground),
-                            contentDescription = ""
+                            composition = lottieAnimation.value,
+                            progress = lottieAnimationSpec.value
                         )
 
                         Text(

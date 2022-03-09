@@ -33,6 +33,7 @@ object Versions {
     const val coroutines = "1.5.2"
     const val firebaseBOM = "29.0.3"
     const val splashScreen = "1.0.0-beta01"
+    const val lottie="5.0.3"
 
     const val jUnit = "4.13.2"
     const val truth = "1.1.3"

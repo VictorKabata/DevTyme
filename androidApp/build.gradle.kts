@@ -86,4 +86,7 @@ dependencies {
     implementation(AndroidDependencies.navigation)
 
     coreLibraryDesugaring(AndroidDependencies.desugaring)
+
+    // Lottie Compose
+    implementation(AndroidDependencies.lottie)
 }

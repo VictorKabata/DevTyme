@@ -26,6 +26,8 @@ object AndroidDependencies {
 
     const val desugaring = "com.android.tools:desugar_jdk_libs:${Versions.desugaring}"
 
+    const val lottie = "com.airbnb.android:lottie-compose:${Versions.lottie}"
+
     const val jUnit = "4.13.2"
     const val truth = "1.1.3"
     const val coroutinesTest = "1.5.0"
