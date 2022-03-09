@@ -5,4 +5,8 @@
     <string name="title_webview">Webview</string>
     <string name="profile_image">Profile image</string>
     <string name="title_daily_goal">Daily Goal</string>
+    <string name="title_weekly_progress">Weekly Progress</string>
+    <string name="title_work_overview">Work Overview</string>
+    <string name="title_projects">Projects</string>
+    <string name="title_languages">Languages</string>
 </resources>
