@@ -26,6 +26,7 @@ import com.vickikbt.devtyme.android.R
 import com.vickikbt.devtyme.android.ui.components.DatesTabs
 import com.vickikbt.devtyme.android.ui.components.HomeToolbar
 import com.vickikbt.devtyme.android.ui.components.ItemProjectOverview
+import io.github.aakira.napier.Napier
 import org.koin.androidx.compose.getViewModel
 
 @Composable
@@ -193,6 +194,8 @@ fun HomeScreen(navController: NavController, viewModel: HomeViewModel = getViewM
                             color = MaterialTheme.colors.secondary,
                             backgroundColor = MaterialTheme.colors.primary.copy(.2f),
                         )
+
+                        // Napier.e("Progress: ${(summaries?.grandTotal?.hours ?: 0.1 / 8).toFloat()}")
                     }
                 }
                 //endregion
@@ -245,8 +248,13 @@ fun HomeScreen(navController: NavController, viewModel: HomeViewModel = getViewM
                 )
 
                 Column(modifier = Modifier, verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                    ItemProjectOverview(title = "Design", hours = "4hrs 20mins")
-                    ItemProjectOverview(title = "Coding", hours = "6hrs 90mins")
+                    summaries?.categories?.forEach { category ->
+                        Napier.e("Category: ${category.name}: ${category.digital}")
+                        ItemProjectOverview(
+                            title = category.name ?: "",
+                            hours = "${category.hours}hr ${category.minutes}mins"
+                        )
+                    }
                 }
                 //endregion
 
@@ -264,8 +272,12 @@ fun HomeScreen(navController: NavController, viewModel: HomeViewModel = getViewM
                 )
 
                 Column(modifier = Modifier, verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                    ItemProjectOverview(title = "DevTyme", hours = "4hrs 20mins")
-                    ItemProjectOverview(title = "Notflix", hours = "6hrs 90mins")
+                    summaries?.projects?.forEach { project ->
+                        ItemProjectOverview(
+                            title = project.name ?: "",
+                            hours = "${project.hours}hr ${project.minutes}mins"
+                        )
+                    }
                 }
                 //endregion
 
@@ -283,9 +295,12 @@ fun HomeScreen(navController: NavController, viewModel: HomeViewModel = getViewM
                 )
 
                 Column(modifier = Modifier, verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                    ItemProjectOverview(title = "Kotlin", hours = "4hrs 20mins")
-                    ItemProjectOverview(title = "Golang", hours = "6hrs 90mins")
-                    ItemProjectOverview(title = "Java", hours = "6hrs 90mins")
+                    summaries?.languages?.forEach { language ->
+                        ItemProjectOverview(
+                            title = language.name ?: "",
+                            hours = "${language.hours}hr ${language.minutes}mins"
+                        )
+                    }
                 }
                 //endregion
             }

@@ -29,7 +29,7 @@ fun ItemProjectOverview(modifier: Modifier = Modifier, title: String, hours: Str
 
         Column(modifier = Modifier.padding(vertical = 6.dp, horizontal = 16.dp)) {
             Text(
-                text = "Project title",
+                text = title,
                 color = MaterialTheme.colors.onSurface,
                 fontSize = 20.sp,
                 style = MaterialTheme.typography.h5,
@@ -39,7 +39,7 @@ fun ItemProjectOverview(modifier: Modifier = Modifier, title: String, hours: Str
             )
 
             Text(
-                text = "4hrs 20mins",
+                text = hours,
                 color = MaterialTheme.colors.onSurface,
                 fontSize = 18.sp,
                 style = MaterialTheme.typography.h3,
