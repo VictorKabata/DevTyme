@@ -1,5 +1,6 @@
 package com.vickikbt.devtyme.di
 
+import com.russhwolf.settings.Settings
 import com.vickikbt.devtyme.data.cache.realm.AccessTokenDao
 import com.vickikbt.devtyme.data.cache.realm.models.AccessTokenEntity
 import com.vickikbt.devtyme.data.data_sources.AuthRepositoryImpl
@@ -24,6 +25,8 @@ import io.realm.RealmConfiguration
 import org.koin.dsl.module
 
 val commonModule = module {
+
+    single { Settings() }
 
     /**
      * Creates a http client for Ktor that is provided to the
@@ -74,5 +77,5 @@ val commonModule = module {
 
     single<AuthRepository> { AuthRepositoryImpl(apiService = get(), accessTokenDao = get()) }
     single<DateTimeRepository> { DateTimeRepositoryImpl() }
-    single<SummariesRepository> { SummariesRepositoryImpl(apiService = get()) }
+    single<SummariesRepository> { SummariesRepositoryImpl(apiService = get(), settings = get()) }
 }
