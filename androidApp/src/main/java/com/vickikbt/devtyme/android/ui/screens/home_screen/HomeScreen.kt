@@ -12,6 +12,7 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -28,7 +29,8 @@ import com.vickikbt.devtyme.android.R
 import com.vickikbt.devtyme.android.ui.components.DatesTabs
 import com.vickikbt.devtyme.android.ui.components.HomeToolbar
 import com.vickikbt.devtyme.android.ui.components.ItemProjectOverview
-import io.github.aakira.napier.Napier
+import com.vickikbt.devtyme.android.utils.toHours
+import com.vickikbt.devtyme.android.utils.toMinutes
 import org.koin.androidx.compose.getViewModel
 import java.util.*
 
@@ -95,13 +97,15 @@ fun HomeScreen(navController: NavController, viewModel: HomeViewModel = getViewM
                 verticalArrangement = Arrangement.Center
             ) {
 
+                Spacer(modifier = Modifier.height(12.dp))
+
                 if (dailyGoal == null || dailyGoal == 0) {
                     //region Set Daily Goal
                     Button(
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(vertical = 12.dp),
-                        onClick = { viewModel.saveDailyGoal(hours = 7) }, // ToDo: Open dialog to set goal
+                        onClick = { viewModel.saveDailyGoal(hours = 9) }, // ToDo: Open dialog to set goal
                         contentPadding = PaddingValues(vertical = 8.dp),
                         shape = RoundedCornerShape(6.dp),
                         colors = ButtonDefaults.buttonColors(
@@ -122,9 +126,9 @@ fun HomeScreen(navController: NavController, viewModel: HomeViewModel = getViewM
                     //endregion
                 } else {
                     //region Daily Goal
-                    summaries?.grandTotal?.hours?.let {
+                    summaries?.grandTotal?.let {
                         val progress by remember {
-                            mutableStateOf(it.toDouble() / dailyGoal)
+                            mutableStateOf((it.hours?.toDouble() ?: 0.0) / dailyGoal)
                         }
                         val animatedProgress = animateFloatAsState(
                             targetValue = progress.toFloat(),
@@ -134,14 +138,12 @@ fun HomeScreen(navController: NavController, viewModel: HomeViewModel = getViewM
                         Text(
                             text = stringResource(R.string.title_daily_goal),
                             color = MaterialTheme.colors.onSurface,
-                            fontSize = 24.sp,
-                            style = MaterialTheme.typography.h6,
+                            fontSize = 22.sp,
+                            style = MaterialTheme.typography.h5,
                             maxLines = 1,
                             overflow = TextOverflow.Ellipsis,
                             textAlign = TextAlign.Start
                         )
-
-                        Spacer(modifier = Modifier.height(6.dp))
 
                         Card(
                             modifier = Modifier
@@ -149,7 +151,7 @@ fun HomeScreen(navController: NavController, viewModel: HomeViewModel = getViewM
                                 .wrapContentHeight(),
                             elevation = 0.dp,
                             shape = RoundedCornerShape(6.dp),
-                            backgroundColor = MaterialTheme.colors.primary.copy(alpha = .2f)
+                            backgroundColor = colorResource(id = R.color.cardBackground)
                         ) {
                             ConstraintLayout(
                                 modifier = Modifier.padding(
@@ -210,7 +212,7 @@ fun HomeScreen(navController: NavController, viewModel: HomeViewModel = getViewM
                                         end.linkTo(linearProgressIndicator.end)
                                         width = Dimension.fillToConstraints
                                     },
-                                    text = "Worked ${it}hrs out of ${dailyGoal}hrs",
+                                    text = "Worked ${it.hours?.toHours()} ${it.minutes?.toMinutes()} out of ${dailyGoal.toHours()}",
                                     color = MaterialTheme.colors.onSurface,
                                     fontSize = 13.sp,
                                     style = MaterialTheme.typography.h4,
@@ -281,20 +283,21 @@ fun HomeScreen(navController: NavController, viewModel: HomeViewModel = getViewM
                 Text(
                     text = stringResource(R.string.title_work_overview),
                     color = MaterialTheme.colors.onSurface,
-                    fontSize = 24.sp,
-                    style = MaterialTheme.typography.h6,
+                    fontSize = 22.sp,
+                    style = MaterialTheme.typography.h5,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                     textAlign = TextAlign.Start
                 )
 
                 Column(modifier = Modifier, verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                    summaries?.categories?.forEach { category ->
-                        ItemProjectOverview(
-                            title = category.name ?: "",
-                            hours = "${category.hours}hr ${category.minutes}mins"
-                        )
-                    }
+                    summaries?.categories?.filter { it.hours != 0 || it.minutes != 0 }
+                        ?.forEach { category ->
+                            ItemProjectOverview(
+                                title = category.name ?: "",
+                                hours = "${category.hours?.toHours()} ${category.minutes?.toMinutes()}"
+                            )
+                        }
                 }
                 //endregion
 
@@ -304,20 +307,21 @@ fun HomeScreen(navController: NavController, viewModel: HomeViewModel = getViewM
                 Text(
                     text = stringResource(R.string.title_projects),
                     color = MaterialTheme.colors.onSurface,
-                    fontSize = 24.sp,
-                    style = MaterialTheme.typography.h6,
+                    fontSize = 22.sp,
+                    style = MaterialTheme.typography.h5,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                     textAlign = TextAlign.Start
                 )
 
                 Column(modifier = Modifier, verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                    summaries?.projects?.forEach { project ->
-                        ItemProjectOverview(
-                            title = project.name ?: "",
-                            hours = "${project.hours}hr ${project.minutes}mins"
-                        )
-                    }
+                    summaries?.projects?.filter { it.hours != 0 || it.minutes != 0 }
+                        ?.forEach { project ->
+                            ItemProjectOverview(
+                                title = project.name ?: "",
+                                hours = "${project.hours}hr ${project.minutes}mins"
+                            )
+                        }
                 }
                 //endregion
 
@@ -327,20 +331,21 @@ fun HomeScreen(navController: NavController, viewModel: HomeViewModel = getViewM
                 Text(
                     text = stringResource(R.string.title_languages),
                     color = MaterialTheme.colors.onSurface,
-                    fontSize = 24.sp,
-                    style = MaterialTheme.typography.h6,
+                    fontSize = 22.sp,
+                    style = MaterialTheme.typography.h5,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                     textAlign = TextAlign.Start
                 )
 
                 Column(modifier = Modifier, verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                    summaries?.languages?.forEach { language ->
-                        ItemProjectOverview(
-                            title = language.name ?: "",
-                            hours = "${language.hours}hr ${language.minutes}mins"
-                        )
-                    }
+                    summaries?.languages?.filter { it.hours != 0 || it.minutes != 0 }
+                        ?.forEach { language ->
+                            ItemProjectOverview(
+                                title = language.name ?: "",
+                                hours = "${language.hours}hr ${language.minutes}mins"
+                            )
+                        }
                 }
                 //endregion
             }

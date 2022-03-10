@@ -22,7 +22,7 @@ class AuthRepositoryImpl constructor(
         val responseEntity = responseDto?.toEntity()
 
         responseEntity?.let {
-            deleteUserToken()
+            // deleteUserToken()
             saveUserToken(accessToken = it)
         }
     }
