@@ -105,7 +105,7 @@ fun HomeScreen(navController: NavController, viewModel: HomeViewModel = getViewM
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(vertical = 12.dp),
-                        onClick = { viewModel.saveDailyGoal(hours = 7) }, // ToDo: Open dialog to set goal
+                        onClick = { viewModel.saveDailyGoal(hours = 9) }, // ToDo: Open dialog to set goal
                         contentPadding = PaddingValues(vertical = 8.dp),
                         shape = RoundedCornerShape(6.dp),
                         colors = ButtonDefaults.buttonColors(
