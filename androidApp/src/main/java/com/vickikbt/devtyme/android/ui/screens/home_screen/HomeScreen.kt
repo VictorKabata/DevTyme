@@ -28,7 +28,8 @@ import com.vickikbt.devtyme.android.R
 import com.vickikbt.devtyme.android.ui.components.DatesTabs
 import com.vickikbt.devtyme.android.ui.components.HomeToolbar
 import com.vickikbt.devtyme.android.ui.components.ItemProjectOverview
-import io.github.aakira.napier.Napier
+import com.vickikbt.devtyme.android.utils.toHours
+import com.vickikbt.devtyme.android.utils.toMinutes
 import org.koin.androidx.compose.getViewModel
 import java.util.*
 
@@ -122,9 +123,9 @@ fun HomeScreen(navController: NavController, viewModel: HomeViewModel = getViewM
                     //endregion
                 } else {
                     //region Daily Goal
-                    summaries?.grandTotal?.hours?.let {
+                    summaries?.grandTotal?.let {
                         val progress by remember {
-                            mutableStateOf(it.toDouble() / dailyGoal)
+                            mutableStateOf((it.hours?.toDouble() ?: 0.0) / dailyGoal)
                         }
                         val animatedProgress = animateFloatAsState(
                             targetValue = progress.toFloat(),
@@ -210,7 +211,7 @@ fun HomeScreen(navController: NavController, viewModel: HomeViewModel = getViewM
                                         end.linkTo(linearProgressIndicator.end)
                                         width = Dimension.fillToConstraints
                                     },
-                                    text = "Worked ${it}hrs out of ${dailyGoal}hrs",
+                                    text = "Worked ${it.hours?.toHours()} ${it.minutes?.toMinutes()} out of ${dailyGoal.toHours()}",
                                     color = MaterialTheme.colors.onSurface,
                                     fontSize = 13.sp,
                                     style = MaterialTheme.typography.h4,
