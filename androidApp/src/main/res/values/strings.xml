@@ -9,4 +9,6 @@
     <string name="title_work_overview">Work Overview</string>
     <string name="title_projects">Projects</string>
     <string name="title_languages">Languages</string>
+
+    <string name="set_daily_goal">Set Daily Goal</string>
 </resources>

@@ -8,6 +8,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
@@ -28,6 +29,7 @@ import com.vickikbt.devtyme.android.ui.components.HomeToolbar
 import com.vickikbt.devtyme.android.ui.components.ItemProjectOverview
 import io.github.aakira.napier.Napier
 import org.koin.androidx.compose.getViewModel
+import java.util.*
 
 @Composable
 fun HomeScreen(navController: NavController, viewModel: HomeViewModel = getViewModel()) {
@@ -37,6 +39,7 @@ fun HomeScreen(navController: NavController, viewModel: HomeViewModel = getViewM
         viewModel.getTimeOfDay()
         viewModel.getDaysOfWeek()
         viewModel.getSummaries()
+        viewModel.getDailyGoal()
     }
 
     val currentUserProfile = viewModel.currentUser.observeAsState().value
@@ -44,9 +47,12 @@ fun HomeScreen(navController: NavController, viewModel: HomeViewModel = getViewM
     val currentDate = viewModel.currentDate.observeAsState().value
     val daysOfWeek = viewModel.daysOfWeek.observeAsState().value
     val summaries = viewModel.summaries.observeAsState().value?.summary?.get(0)
+    val dailyGoal = viewModel.dailyGoal.observeAsState().value
 
     var selectedDate by remember { mutableStateOf(0) }
     val scrollState: ScrollState = rememberScrollState()
+
+    Napier.e("Daily goal: $dailyGoal")
 
     val lottieAnimation =
         rememberLottieComposition(spec = LottieCompositionSpec.RawRes(R.raw.trophy))
@@ -88,6 +94,29 @@ fun HomeScreen(navController: NavController, viewModel: HomeViewModel = getViewM
                     .padding(horizontal = 16.dp)
                     .verticalScroll(state = scrollState)
             ) {
+
+                //region Set Daily Goal
+                Button(
+                    modifier = Modifier.padding(start = 32.dp, end = 32.dp, bottom = 32.dp),
+                    onClick = { viewModel.saveDailyGoal(hours = 6) },
+                    contentPadding = PaddingValues(vertical = 8.dp),
+                    shape = RoundedCornerShape(6.dp),
+                    colors = ButtonDefaults.buttonColors(
+                        backgroundColor = MaterialTheme.colors.primary,
+                        contentColor = MaterialTheme.colors.onPrimary
+                    )
+                ) {
+                    Text(
+                        modifier = Modifier.align(Alignment.Bottom),
+                        text = stringResource(R.string.set_daily_goal).uppercase(Locale.getDefault()),
+                        fontSize = 16.sp,
+                        style = MaterialTheme.typography.h6,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis,
+                        textAlign = TextAlign.Center
+                    )
+                }
+                //endregion
 
                 //region Daily Goal
                 Text(

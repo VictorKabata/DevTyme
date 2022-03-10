@@ -33,6 +33,9 @@ class HomeViewModel constructor(
     private val _summaries = MutableLiveData<Summaries>()
     val summaries: LiveData<Summaries> get() = _summaries
 
+    private val _dailyGoal = MutableLiveData<Int?>()
+    val dailyGoal: LiveData<Int?> get() = _dailyGoal
+
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> get() = _isLoading
 
@@ -68,7 +71,7 @@ class HomeViewModel constructor(
         }
     }
 
-    fun getCurrentDate() {
+    private fun getCurrentDate() {
         viewModelScope.launch {
             try {
                 dateTimeRepository.getCurrentDate().collectLatest {
@@ -99,6 +102,22 @@ class HomeViewModel constructor(
                     .collectLatest {
                         _summaries.value = it
                     }
+            } catch (e: Exception) {
+                _errorMessage.value = e.localizedMessage
+            }
+        }
+    }
+
+    fun saveDailyGoal(hours: Int) {
+        viewModelScope.launch { summariesRepository.saveDailyGoal(hours = hours) }
+    }
+
+    fun getDailyGoal() {
+        viewModelScope.launch {
+            try {
+                summariesRepository.getDailyGoal().collectLatest {
+                    _dailyGoal.value = it
+                }
             } catch (e: Exception) {
                 _errorMessage.value = e.localizedMessage
             }
