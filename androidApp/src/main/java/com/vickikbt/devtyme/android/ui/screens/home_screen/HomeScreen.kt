@@ -201,7 +201,7 @@ fun HomeScreen(navController: NavController, viewModel: HomeViewModel = getViewM
                 //endregion
 
                 //region Weekly Progress
-                Spacer(modifier = Modifier.height(12.dp))
+                /*Spacer(modifier = Modifier.height(12.dp))
 
                 Text(
                     text = stringResource(R.string.title_weekly_progress),
@@ -231,7 +231,7 @@ fun HomeScreen(navController: NavController, viewModel: HomeViewModel = getViewM
                     ) {
                         // ToDo: Weekly stats
                     }
-                }
+                }*/
                 //endregion
 
                 //region Work Overview
