@@ -1,5 +1,6 @@
 package com.vickikbt.devtyme.android.ui.screens.home_screen
 
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -52,8 +53,6 @@ fun HomeScreen(navController: NavController, viewModel: HomeViewModel = getViewM
     var selectedDate by remember { mutableStateOf(0) }
     val scrollState: ScrollState = rememberScrollState()
 
-    Napier.e("Daily goal: $dailyGoal")
-
     val lottieAnimation =
         rememberLottieComposition(spec = LottieCompositionSpec.RawRes(R.raw.trophy))
     val lottieAnimationSpec = animateLottieCompositionAsState(
@@ -92,142 +91,155 @@ fun HomeScreen(navController: NavController, viewModel: HomeViewModel = getViewM
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp)
-                    .verticalScroll(state = scrollState)
+                    .verticalScroll(state = scrollState),
+                verticalArrangement = Arrangement.Center
             ) {
 
-                //region Set Daily Goal
-                Button(
-                    modifier = Modifier.padding(start = 32.dp, end = 32.dp, bottom = 32.dp),
-                    onClick = { viewModel.saveDailyGoal(hours = 6) },
-                    contentPadding = PaddingValues(vertical = 8.dp),
-                    shape = RoundedCornerShape(6.dp),
-                    colors = ButtonDefaults.buttonColors(
-                        backgroundColor = MaterialTheme.colors.primary,
-                        contentColor = MaterialTheme.colors.onPrimary
-                    )
-                ) {
-                    Text(
-                        modifier = Modifier.align(Alignment.Bottom),
-                        text = stringResource(R.string.set_daily_goal).uppercase(Locale.getDefault()),
-                        fontSize = 16.sp,
-                        style = MaterialTheme.typography.h6,
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis,
-                        textAlign = TextAlign.Center
-                    )
-                }
-                //endregion
-
-                //region Daily Goal
-                Text(
-                    text = stringResource(R.string.title_daily_goal),
-                    color = MaterialTheme.colors.onSurface,
-                    fontSize = 24.sp,
-                    style = MaterialTheme.typography.h6,
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis,
-                    textAlign = TextAlign.Start
-                )
-
-                Spacer(modifier = Modifier.height(6.dp))
-
-                Card(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .wrapContentHeight(),
-                    elevation = 0.dp,
-                    shape = RoundedCornerShape(6.dp),
-                    backgroundColor = MaterialTheme.colors.primary.copy(alpha = .2f)
-                ) {
-                    ConstraintLayout(
-                        modifier = Modifier.padding(
-                            horizontal = 12.dp,
-                            vertical = 10.dp
+                if (dailyGoal == null || dailyGoal == 0) {
+                    //region Set Daily Goal
+                    Button(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(vertical = 12.dp),
+                        onClick = { viewModel.saveDailyGoal(hours = 7) }, // ToDo: Open dialog to set goal
+                        contentPadding = PaddingValues(vertical = 8.dp),
+                        shape = RoundedCornerShape(6.dp),
+                        colors = ButtonDefaults.buttonColors(
+                            backgroundColor = MaterialTheme.colors.primary,
+                            contentColor = MaterialTheme.colors.onPrimary
                         )
                     ) {
-                        val (textProgressTitle, textProgressDescription, imageProgress, textProgress, linearProgressIndicator) = createRefs()
-
                         Text(
-                            modifier = Modifier.constrainAs(textProgressTitle) {
-                                start.linkTo(parent.start)
-                                top.linkTo(parent.top)
-                                end.linkTo(imageProgress.start)
-                                width = Dimension.fillToConstraints
-                            },
-                            text = "Almost There!",
-                            color = MaterialTheme.colors.onSurface,
-                            fontSize = 20.sp,
-                            style = MaterialTheme.typography.h5,
-                            maxLines = 2,
+                            modifier = Modifier.align(Alignment.Bottom),
+                            text = stringResource(R.string.set_daily_goal).uppercase(Locale.getDefault()),
+                            fontSize = 16.sp,
+                            style = MaterialTheme.typography.h6,
+                            maxLines = 1,
                             overflow = TextOverflow.Ellipsis,
-                            textAlign = TextAlign.Start
+                            textAlign = TextAlign.Center
                         )
+                    }
+                    //endregion
+                } else {
+                    //region Daily Goal
+                    summaries?.grandTotal?.hours?.let {
+                        val progress by remember {
+                            mutableStateOf(it.toDouble() / dailyGoal)
+                        }
+                        val animatedProgress = animateFloatAsState(
+                            targetValue = progress.toFloat(),
+                            animationSpec = ProgressIndicatorDefaults.ProgressAnimationSpec
+                        ).value
 
                         Text(
-                            modifier = Modifier.constrainAs(textProgressDescription) {
-                                start.linkTo(textProgressTitle.start)
-                                top.linkTo(textProgressTitle.bottom)
-                                end.linkTo(imageProgress.start)
-                                width = Dimension.fillToConstraints
-                            },
-                            text = "Just keep going",
+                            text = stringResource(R.string.title_daily_goal),
                             color = MaterialTheme.colors.onSurface,
-                            fontSize = 14.sp,
-                            style = MaterialTheme.typography.h4,
-                            maxLines = 2,
-                            overflow = TextOverflow.Ellipsis,
-                            textAlign = TextAlign.Start
-                        )
-
-                        LottieAnimation(
-                            modifier = Modifier
-                                .size(130.dp)
-                                .constrainAs(imageProgress) {
-                                    top.linkTo(parent.top)
-                                    end.linkTo(parent.end)
-                                    bottom.linkTo(parent.bottom)
-                                },
-                            composition = lottieAnimation.value,
-                            progress = lottieAnimationSpec.value
-                        )
-
-                        Text(
-                            modifier = Modifier.constrainAs(textProgress) {
-                                start.linkTo(linearProgressIndicator.start)
-                                bottom.linkTo(linearProgressIndicator.top)
-                                end.linkTo(linearProgressIndicator.end)
-                                width = Dimension.fillToConstraints
-                            },
-                            text = "Worked ${summaries?.grandTotal?.hours}hrs out of 8hrs",
-                            color = MaterialTheme.colors.onSurface,
-                            fontSize = 13.sp,
-                            style = MaterialTheme.typography.h4,
-                            maxLines = 2,
+                            fontSize = 24.sp,
+                            style = MaterialTheme.typography.h6,
+                            maxLines = 1,
                             overflow = TextOverflow.Ellipsis,
                             textAlign = TextAlign.Start
                         )
 
                         Spacer(modifier = Modifier.height(6.dp))
 
-                        LinearProgressIndicator(
+                        Card(
                             modifier = Modifier
-                                .height(8.dp)
-                                .clip(RoundedCornerShape(8.dp))
-                                .constrainAs(linearProgressIndicator) {
-                                    start.linkTo(parent.start)
-                                    bottom.linkTo(parent.bottom)
-                                    end.linkTo(imageProgress.start)
-                                    width = Dimension.fillToConstraints
-                                },
-                            progress = (summaries?.grandTotal?.hours ?: 0.1 / 8).toFloat(),
-                            color = MaterialTheme.colors.secondary,
-                            backgroundColor = MaterialTheme.colors.primary.copy(.2f),
-                        )
+                                .fillMaxWidth()
+                                .wrapContentHeight(),
+                            elevation = 0.dp,
+                            shape = RoundedCornerShape(6.dp),
+                            backgroundColor = MaterialTheme.colors.primary.copy(alpha = .2f)
+                        ) {
+                            ConstraintLayout(
+                                modifier = Modifier.padding(
+                                    horizontal = 12.dp,
+                                    vertical = 10.dp
+                                )
+                            ) {
+                                val (textProgressTitle, textProgressDescription, imageProgress, textProgress, linearProgressIndicator) = createRefs()
 
-                        // Napier.e("Progress: ${(summaries?.grandTotal?.hours ?: 0.1 / 8).toFloat()}")
+                                Text(
+                                    modifier = Modifier.constrainAs(textProgressTitle) {
+                                        start.linkTo(parent.start)
+                                        top.linkTo(parent.top)
+                                        end.linkTo(imageProgress.start)
+                                        width = Dimension.fillToConstraints
+                                    },
+                                    text = "Almost There!",
+                                    color = MaterialTheme.colors.onSurface,
+                                    fontSize = 20.sp,
+                                    style = MaterialTheme.typography.h5,
+                                    maxLines = 2,
+                                    overflow = TextOverflow.Ellipsis,
+                                    textAlign = TextAlign.Start
+                                )
+
+                                Text(
+                                    modifier = Modifier.constrainAs(textProgressDescription) {
+                                        start.linkTo(textProgressTitle.start)
+                                        top.linkTo(textProgressTitle.bottom)
+                                        end.linkTo(imageProgress.start)
+                                        width = Dimension.fillToConstraints
+                                    },
+                                    text = "Just keep going",
+                                    color = MaterialTheme.colors.onSurface,
+                                    fontSize = 14.sp,
+                                    style = MaterialTheme.typography.h4,
+                                    maxLines = 2,
+                                    overflow = TextOverflow.Ellipsis,
+                                    textAlign = TextAlign.Start
+                                )
+
+                                LottieAnimation(
+                                    modifier = Modifier
+                                        .size(130.dp)
+                                        .constrainAs(imageProgress) {
+                                            top.linkTo(parent.top)
+                                            end.linkTo(parent.end)
+                                            bottom.linkTo(parent.bottom)
+                                        },
+                                    composition = lottieAnimation.value,
+                                    progress = lottieAnimationSpec.value
+                                )
+
+                                Text(
+                                    modifier = Modifier.constrainAs(textProgress) {
+                                        start.linkTo(linearProgressIndicator.start)
+                                        bottom.linkTo(linearProgressIndicator.top)
+                                        end.linkTo(linearProgressIndicator.end)
+                                        width = Dimension.fillToConstraints
+                                    },
+                                    text = "Worked ${it}hrs out of ${dailyGoal}hrs",
+                                    color = MaterialTheme.colors.onSurface,
+                                    fontSize = 13.sp,
+                                    style = MaterialTheme.typography.h4,
+                                    maxLines = 2,
+                                    overflow = TextOverflow.Ellipsis,
+                                    textAlign = TextAlign.Start
+                                )
+
+                                Spacer(modifier = Modifier.height(6.dp))
+
+                                LinearProgressIndicator(
+                                    modifier = Modifier
+                                        .height(8.dp)
+                                        .clip(RoundedCornerShape(10.dp))
+                                        .constrainAs(linearProgressIndicator) {
+                                            start.linkTo(parent.start)
+                                            bottom.linkTo(parent.bottom)
+                                            end.linkTo(imageProgress.start)
+                                            width = Dimension.fillToConstraints
+                                        },
+                                    progress = animatedProgress,
+                                    color = MaterialTheme.colors.secondary,
+                                    backgroundColor = MaterialTheme.colors.primary.copy(.6f)
+                                )
+                            }
+                        }
                     }
+                    //endregion
                 }
-                //endregion
 
                 //region Weekly Progress
                 /*Spacer(modifier = Modifier.height(12.dp))
@@ -278,7 +290,6 @@ fun HomeScreen(navController: NavController, viewModel: HomeViewModel = getViewM
 
                 Column(modifier = Modifier, verticalArrangement = Arrangement.spacedBy(6.dp)) {
                     summaries?.categories?.forEach { category ->
-                        Napier.e("Category: ${category.name}: ${category.digital}")
                         ItemProjectOverview(
                             title = category.name ?: "",
                             hours = "${category.hours}hr ${category.minutes}mins"
