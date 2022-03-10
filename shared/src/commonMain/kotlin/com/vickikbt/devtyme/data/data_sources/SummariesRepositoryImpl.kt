@@ -22,7 +22,6 @@ class SummariesRepositoryImpl constructor(
         settings.putInt(key = "daily_goal", value = hours)
 
     override suspend fun getDailyGoal(): Flow<Int?> {
-        val hours = settings.getIntOrNull(key = "daily_goal")
-        return flowOf(hours)
+        return flowOf(settings.getIntOrNull(key = "daily_goal"))
     }
 }
