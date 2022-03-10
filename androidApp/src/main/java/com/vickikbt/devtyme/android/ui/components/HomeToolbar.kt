@@ -51,7 +51,7 @@ fun HomeToolbar(
                 textAlign = TextAlign.Start
             )
 
-            Spacer(modifier = Modifier.height(2.dp))
+            Spacer(modifier = Modifier.height(1.dp))
 
             Text(
                 text = subTitle,
@@ -69,7 +69,7 @@ fun HomeToolbar(
 
         //region Profile Picture
         val profileImagePainter = rememberImagePainter(data = profileImageUrl) {
-            // placeholder(R.drawable.ic_logo)
+            placeholder(R.drawable.ic_launcher_foreground)
             crossfade(true)
         }
 
