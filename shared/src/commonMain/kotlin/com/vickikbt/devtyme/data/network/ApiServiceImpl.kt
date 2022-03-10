@@ -2,6 +2,7 @@ package com.vickikbt.devtyme.data.network
 
 import com.vickikbt.devtyme.data.network.models.AccessTokenDto
 import com.vickikbt.devtyme.data.network.models.CurrentUserDto
+import com.vickikbt.devtyme.data.network.models.SummariesDto
 import com.vickikbt.devtyme.domain.utils.Constants
 import io.ktor.client.*
 import io.ktor.client.features.*
@@ -42,6 +43,28 @@ class ApiServiceImpl constructor(private val httpClient: HttpClient) : ApiServic
     override suspend fun getCurrentUser(): CurrentUserDto? {
         return try {
             httpClient.get<CurrentUserDto>(urlString = "https://wakatime.com/api/v1/users/current")
+        } catch (e: ServerResponseException) {
+            println("500 error: ${e.message}")
+            null
+        } catch (e: ClientRequestException) {
+            println("400 error: ${e.message}")
+            null
+        } catch (e: RedirectResponseException) {
+            println("300 error: ${e.message}")
+            null
+        } catch (e: Exception) {
+            println("Error: ${e.message}")
+            null
+        }
+    }
+
+    override suspend fun fetchSummaries(start: String?, range: String?): SummariesDto? {
+        return try {
+            httpClient.get<SummariesDto>(urlString = "https://wakatime.com/api/v1/users/current/summaries") {
+                parameter("start", start)
+                parameter("end", start)
+                parameter("range", range)
+            }
         } catch (e: ServerResponseException) {
             println("500 error: ${e.message}")
             null

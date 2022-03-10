@@ -3,9 +3,10 @@ object Versions {
     const val ktor = "1.6.7"
     const val kotlinSerialization = "1.6.10"
     const val kotlinxSerialization = "1.2.2"
-    const val coroutinesKmm = "1.6.0"
+    const val kotlinxCoroutines = "1.6.0"
     const val realm = "0.9.0"
     const val napier = "2.4.0"
+    const val kotlinxDateTime = "0.3.2"
 
     // KMM test libs
     const val mockk = "1.12.3"
@@ -13,6 +14,7 @@ object Versions {
     const val gradle = "7.1.1"
     const val kotlin = "1.6.10"
     const val detekt = "1.19.0"
+    const val desugaring="1.1.5"
 
     const val androidCore = "1.7.0"
     const val appCompat = "1.4.1"
@@ -31,6 +33,7 @@ object Versions {
     const val coroutines = "1.5.2"
     const val firebaseBOM = "29.0.3"
     const val splashScreen = "1.0.0-beta01"
+    const val lottie="5.0.3"
 
     const val jUnit = "4.13.2"
     const val truth = "1.1.3"

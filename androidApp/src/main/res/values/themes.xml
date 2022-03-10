@@ -1,10 +1,10 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
     <style name="Theme.DevTyme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimary">@color/primaryColor</item>
         <item name="colorOnPrimary">@color/black</item>
 
-        <item name="colorSecondary">@color/colorSecondary</item>
+        <item name="colorSecondary">@color/secondaryColor</item>
         <item name="colorOnSecondary">@color/black</item>
 
         <item name="colorOnBackground">@color/black</item>
@@ -13,10 +13,10 @@
         <!--<item name="android:windowLightStatusBar" tools:targetApi="m">true</item>-->
     </style>
 
-   <!-- <style name="Theme.App.Starting" parent="Theme.SplashScreen">
-        <item name="windowSplashScreenBackground">@color/colorPrimary</item>
-        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_logo</item>
-        <item name="postSplashScreenTheme">@style/Theme.DevTyme</item>
-    </style>-->
+    <!-- <style name="Theme.App.Starting" parent="Theme.SplashScreen">
+         <item name="windowSplashScreenBackground">@color/colorPrimary</item>
+         <item name="windowSplashScreenAnimatedIcon">@drawable/ic_logo</item>
+         <item name="postSplashScreenTheme">@style/Theme.DevTyme</item>
+     </style>-->
 
 </resources>

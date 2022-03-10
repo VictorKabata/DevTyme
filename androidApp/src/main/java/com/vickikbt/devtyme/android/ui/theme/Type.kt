@@ -8,10 +8,11 @@ import androidx.compose.ui.text.font.FontWeight
 import com.vickikbt.devtyme.android.R
 
 val fonts = FontFamily(
-    Font(R.font.roboto_regular, weight = FontWeight.Normal),
-    Font(R.font.roboto_medium, weight = FontWeight.Medium),
-    Font(R.font.roboto_bold, weight = FontWeight.Bold),
-    Font(R.font.roboto_black, weight = FontWeight.Black)
+    Font(R.font.poppins_regular, weight = FontWeight.Normal),
+    Font(R.font.poppins_medium, weight = FontWeight.Medium),
+    Font(R.font.poppins_bold, weight = FontWeight.SemiBold),
+    Font(R.font.poppins_bold, weight = FontWeight.Bold),
+    Font(R.font.poppins_extra_bold, weight = FontWeight.ExtraBold)
 )
 
 val Typography = Typography(
@@ -23,6 +24,11 @@ val Typography = Typography(
     h4 = TextStyle(
         fontFamily = fonts,
         fontWeight = FontWeight.Medium
+    ),
+
+    h3 = TextStyle(
+        fontFamily = fonts,
+        fontWeight = FontWeight.SemiBold
     ),
 
     h5 = TextStyle(

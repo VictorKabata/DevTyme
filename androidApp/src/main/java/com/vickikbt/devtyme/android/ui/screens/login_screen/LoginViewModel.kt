@@ -5,9 +5,7 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.vickikbt.devtyme.domain.models.AccessToken
 import com.vickikbt.devtyme.domain.repositories.AuthRepository
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 class LoginViewModel constructor(private val authRepository: AuthRepository) : ViewModel() {

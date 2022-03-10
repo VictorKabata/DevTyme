@@ -1,5 +1,6 @@
 package com.vickikbt.devtyme.android.ui.components
 
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Tab
@@ -39,7 +40,9 @@ fun DatesTabs(
             val isSelected = selectedTab == index
 
             Tab(
-                modifier = Modifier.clip(RoundedCornerShape(10.dp)),
+                modifier = Modifier
+                    .padding(vertical = 6.dp)
+                    .clip(RoundedCornerShape(10.dp)),
                 selected = selectedTab == index,
                 onClick = { onTabItemClick(index) },
                 text = {

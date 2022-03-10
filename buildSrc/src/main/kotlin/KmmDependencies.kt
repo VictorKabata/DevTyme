@@ -1,7 +1,7 @@
 object KmmDependencies {
 
-    const val coroutinesKmm =
-        "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutinesKmm}"
+    const val kotlinxCoroutines =
+        "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.kotlinxCoroutines}"
 
     const val koinCore = "io.insert-koin:koin-core:${Versions.koin}"
 
@@ -18,6 +18,8 @@ object KmmDependencies {
     const val realm = "io.realm.kotlin:library-base:${Versions.realm}"
 
     const val napier = "io.github.aakira:napier:${Versions.napier}"
+
+    const val kotlinxDateTime = "org.jetbrains.kotlinx:kotlinx-datetime:${Versions.kotlinxDateTime}"
 
     const val mockk = "io.mockk:mockk:${Versions.mockk}"
 }
