@@ -21,5 +21,8 @@ object KmmDependencies {
 
     const val kotlinxDateTime = "org.jetbrains.kotlinx:kotlinx-datetime:${Versions.kotlinxDateTime}"
 
+    const val multiplatformSettings =
+        "com.russhwolf:multiplatform-settings:${Versions.multiplatformSettings}"
+
     const val mockk = "io.mockk:mockk:${Versions.mockk}"
 }

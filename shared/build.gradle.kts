@@ -37,6 +37,8 @@ kotlin {
                 api(KmmDependencies.napier)
 
                 implementation(KmmDependencies.kotlinxDateTime)
+
+                implementation(KmmDependencies.multiplatformSettings)
             }
         }
 
