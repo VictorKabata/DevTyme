@@ -44,6 +44,7 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
+        isCoreLibraryDesugaringEnabled = true
     }
 
     kotlinOptions { jvmTarget = JavaVersion.VERSION_1_8.toString() }
@@ -52,37 +53,40 @@ android {
 dependencies {
     implementation(project(":shared"))
 
-    implementation(Dependencies.androidCore)
-    implementation(Dependencies.appCompat)
+    implementation(AndroidDependencies.androidCore)
+    implementation(AndroidDependencies.appCompat)
 
-    implementation(Dependencies.material)
+    implementation(AndroidDependencies.material)
 
-    implementation(Dependencies.composeUi)
-    implementation(Dependencies.composeMaterial)
-    implementation(Dependencies.composeTooling)
+    implementation(AndroidDependencies.composeUi)
+    implementation(AndroidDependencies.composeMaterial)
+    implementation(AndroidDependencies.composeTooling)
+    implementation(AndroidDependencies.composeConstraint)
     // androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_version"
-    implementation(Dependencies.composeLiveData)
+    implementation(AndroidDependencies.composeLiveData)
     // debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
-    implementation(Dependencies.composeActivity)
+    implementation(AndroidDependencies.composeActivity)
 
-    implementation(Dependencies.lifeCycleRuntime)
+    implementation(AndroidDependencies.lifeCycleRuntime)
 
     // Koin-Dependency injection
-    implementation(Dependencies.koinAndroid)
-    implementation(Dependencies.koinCompose)
+    implementation(AndroidDependencies.koinAndroid)
+    implementation(AndroidDependencies.koinCompose)
 
     // Accompanist Libs
-    implementation(Dependencies.accompanistNavigationAnimation)
+    implementation(AndroidDependencies.accompanistNavigationAnimation)
 
     // Splash Screen API
-    implementation(Dependencies.splashScreen)
+    implementation(AndroidDependencies.splashScreen)
 
     // Coil-Image Loader
-    implementation(Dependencies.coil)
-
-    // Timber-Logging
-    implementation(Dependencies.timber)
+    implementation(AndroidDependencies.coil)
 
     // Compose Navigation-Navigation between various screens
-    implementation(Dependencies.navigation)
+    implementation(AndroidDependencies.navigation)
+
+    coreLibraryDesugaring(AndroidDependencies.desugaring)
+
+    // Lottie Compose
+    implementation(AndroidDependencies.lottie)
 }

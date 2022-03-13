@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#6200EE</color>
-    <color name="colorPrimaryDark">#3700B3</color>
-    <color name="colorAccent">#03DAC5</color>
+    <color name="primaryColor">#B78DFF</color>
+    <color name="secondaryColor">#8F4EFF</color>
+
+    <color name="textPrimary">#000000</color>
+    <color name="textSecondary">#505050</color>
+    <color name="textSelectedTab">#D3D3D3</color>
+
+    <color name="cardBackground">#16B78DFF</color>
+
+    <color name="red">#FF8D8D</color>
+    <color name="blue">#8D91FF</color>
+    <color name="green">#8DFFB7</color>
+    <color name="yellow">#FFC880</color>
+
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
 </resources>
