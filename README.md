@@ -14,12 +14,14 @@ Kotlin Multiplatform Mobile application built using that consumes [WakaTime API 
 
 ## Table Of Content
 
-- [Libraries](#libraries)
-  - [Shared](#shared)
-  - [Android](#android)
-- [Extras](#extras)
-- [Related Resources](#related-resources)
-- [Other Helpful Resources](#other-helpful-resources)
+- [Libraries](##Libraries)
+  - [Shared](###Shared)
+  - [Android](###Android)
+- [Extras](##Extras)
+- [Demo](##Demo)
+  - [Android](##Android)
+- [Related Resources](#Related-resources)
+- [Other Helpful Resources](#Other-helpful-resources)
 
 ## Libraries
 
@@ -45,6 +47,12 @@ Kotlin Multiplatform Mobile application built using that consumes [WakaTime API 
 ## Extras
 
 - [GitHub Actions](https://docs.github.com/en/actions) -The project uses GitHub actions for CI?CD operations such as running automated builds, tests and deploying applications.
+
+## Demo
+
+## Android
+
+<img src="assets/img1.png" width="250"/> <img src="assets/img2.png" width="250"/> <img src="assets/img3.png" width="250"/>
 
 ## Related Resources
 
