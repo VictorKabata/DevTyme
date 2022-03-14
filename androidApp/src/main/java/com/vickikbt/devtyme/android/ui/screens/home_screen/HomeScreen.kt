@@ -52,7 +52,7 @@ fun HomeScreen(navController: NavController, viewModel: HomeViewModel = getViewM
     val summaries = viewModel.summaries.observeAsState().value?.summary?.get(0)
     val dailyGoal = viewModel.dailyGoal.observeAsState().value
 
-    var selectedDate by remember { mutableStateOf(0) }
+    var selectedDate by remember { mutableStateOf(daysOfWeek?.indexOf(currentDate)) }
     val scrollState: ScrollState = rememberScrollState()
 
     val lottieAnimation =

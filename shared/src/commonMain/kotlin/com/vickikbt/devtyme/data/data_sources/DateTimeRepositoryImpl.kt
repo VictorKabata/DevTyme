@@ -20,7 +20,8 @@ class DateTimeRepositoryImpl : DateTimeRepository {
     }
 
     override fun getCurrentDate(): Flow<String> {
-        return flowOf(Clock.System.now().toString())
+        val currentDate = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()).date
+        return flowOf("${currentDate.dayOfWeek.name[0]}\n${currentDate.dayOfMonth}")
     }
 
     override fun getDaysOfWeek(): Flow<List<String>> {
