@@ -49,8 +49,8 @@ android {
 
     kotlinOptions { jvmTarget = JavaVersion.VERSION_1_8.toString() }
 
-    lint {
-        baseline = file("lint-baseline.xml")
+    lintOptions {
+        isAbortOnError = false
     }
 }
 
