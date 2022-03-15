@@ -14,12 +14,14 @@ Kotlin Multiplatform Mobile application built using that consumes [WakaTime API 
 
 ## Table Of Content
 
-- [Libraries](#libraries)
-    - [Shared](#shared)
-    - [Android](#android)
-- [Extras](#extras)
-- [Related Resources](#related-resources)
-- [Other Helpful Resources](#other-helpful-resources)
+- [Libraries](##Libraries)
+  - [Shared](###Shared)
+  - [Android](###Android)
+- [Extras](##Extras)
+- [Demo](##Demo)
+  - [Android](##Android)
+- [Related Resources](#Related-resources)
+- [Other Helpful Resources](#Other-helpful-resources)
 
 ## Libraries
 
@@ -46,10 +48,49 @@ Kotlin Multiplatform Mobile application built using that consumes [WakaTime API 
 
 - [GitHub Actions](https://docs.github.com/en/actions) -The project uses GitHub actions for CI?CD operations such as running automated builds, tests and deploying applications.
 
+## Demo
+
+## Android
+
+<img src="assets/img1.png" width="250"/> <img src="assets/img2.png" width="250"/> <img src="assets/img3.png" width="250"/>
+
 ## Related Resources
 
 In this section I've included some resources ie. articles and GitHub reposirtories that i used to learn about kotlin mutltiplatform mobile:
 
+### Videos 📽️
+
+- [Your First Kotlin Multiplatform Mobile App Tutorial](https://www.youtube.com/watch?v=GcqFhoUuNNI)
+- [Sharing Code between iOS and Android with Kotlin #1](https://www.youtube.com/watch?v=mdN6P6RI__k&t=13s)
+
+### Articles/Blogs 📖
+
+- [Kotlin Multiplatform Hands-on: Networking and Data Storage](https://play.kotlinlang.org/hands-on/Networking%20and%20Data%20Storage%20with%20Kotlin%20Multiplatfrom%20Mobile/01_Introduction)
+- [KaMPKit General Architecture](https://github.com/touchlab/KaMPKit/blob/main/docs/GENERAL_ARCHITECTURE.md)
+- [Using Koin in a Kotlin Multiplatform Project](https://johnoreilly.dev/posts/kotlinmultiplatform-koin/)
+- [Create your first cross-platform mobile app – tutorial](https://kotlinlang.org/docs/multiplatform-mobile-create-first-app.html) - Learn how to create and run your first Kotlin Multiplatform Mobile application.
+- [Kotlin Multiplatform. Very beginner’s guide (part 1-3)](https://medium.com/proandroiddev/kotlin-multiplatform-very-beginners-guide-part-1-6419f74afa0f)
+- [Using Realm persistence library in a Kotlin Multiplatform project](https://johnoreilly.dev/posts/realm-kotlinmultiplatform/)
+
+### Sample Projects 🤖
+
+- [KMM Sample](https://github.com/KaterinaPetrova/kmm-sample) - A sample project for experiments with Kotlin Multiplatform mobile.
+- [Fantasy Premier League](https://github.com/joreilly/FantasyPremierLeague) - Kotlin Multiplatform project with Jetpack Compose, Compose for Desktop and SwiftUI clients (and using Ktor for remote API requests and Realm for persistence).
+- [KaMPKit](https://github.com/touchlab/KaMPKit)
+- [People In Space](https://github.com/joreilly/PeopleInSpace) - Minimal Kotlin Multiplatform project with SwiftUI, Jetpack Compose, Compose for Wear OS, Compose for Desktop, Compose for Web, and Kotlin/JS + React clients along with Ktor backend.
+
 ## Other Helpful Resources
 
 In this section I've included resources that are not related to kotin multiplatform mobile but were really helpful in learning other android components and tools:
+
+### Videos 📽️
+
+- ToDo
+
+### Articles/Blogs 📖
+
+- ToDo
+
+### Sample Projects 🤖
+
+- [MortyComposeKMM](https://github.com/joreilly/MortyComposeKMM) - Kotlin Multiplatform sample that demonstrates use of GraphQL + Jetpack Compose and SwiftUI (based on <https://github.com/Dimillian/MortyUI> SwiftUI project).
