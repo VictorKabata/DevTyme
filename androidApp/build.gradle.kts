@@ -48,6 +48,10 @@ android {
     }
 
     kotlinOptions { jvmTarget = JavaVersion.VERSION_1_8.toString() }
+
+    lintOptions {
+        isAbortOnError = false
+    }
 }
 
 dependencies {
@@ -64,7 +68,6 @@ dependencies {
     implementation(AndroidDependencies.composeConstraint)
     // androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_version"
     implementation(AndroidDependencies.composeLiveData)
-    // debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
     implementation(AndroidDependencies.composeActivity)
 
     implementation(AndroidDependencies.lifeCycleRuntime)
