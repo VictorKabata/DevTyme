@@ -64,10 +64,10 @@ fun LoginScreen(navController: NavController, viewModel: LoginViewModel = getVie
                 .padding(start = 32.dp, end = 32.dp, bottom = 32.dp),
             onClick = { wakatimeOAuth(context = context) },
             contentPadding = PaddingValues(vertical = 8.dp),
-            shape = RoundedCornerShape(4.dp),
+            shape = RoundedCornerShape(6.dp),
             colors = ButtonDefaults.buttonColors(
-                backgroundColor = MaterialTheme.colors.onSurface,
-                contentColor = MaterialTheme.colors.background
+                backgroundColor = MaterialTheme.colors.primary,
+                contentColor = MaterialTheme.colors.onPrimary
             )
         ) {
             if (isLoading.value) {

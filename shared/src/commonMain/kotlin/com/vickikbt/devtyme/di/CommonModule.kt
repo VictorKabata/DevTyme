@@ -1,8 +1,7 @@
 package com.vickikbt.devtyme.di
 
 import com.russhwolf.settings.Settings
-import com.vickikbt.devtyme.data.cache.realm.AccessTokenDao
-import com.vickikbt.devtyme.data.cache.realm.models.AccessTokenEntity
+import com.vickikbt.devtyme.data.cache.sqldelight.AccessTokenDao
 import com.vickikbt.devtyme.data.data_sources.AuthRepositoryImpl
 import com.vickikbt.devtyme.data.data_sources.DateTimeRepositoryImpl
 import com.vickikbt.devtyme.data.data_sources.SummariesRepositoryImpl
@@ -19,9 +18,7 @@ import io.ktor.client.features.json.*
 import io.ktor.client.features.json.serializer.*
 import io.ktor.client.features.logging.*
 import io.ktor.client.request.*
-import io.realm.Configuration
-import io.realm.Realm
-import io.realm.RealmConfiguration
+import org.koin.core.module.Module
 import org.koin.dsl.module
 
 val commonModule = module {
@@ -59,23 +56,11 @@ val commonModule = module {
     }
     single<ApiService> { ApiServiceImpl(httpClient = get()) }
 
-    /**
-     *Create instance of realm config need to
-     * instantiate realm db instance that is
-     * provided to DAOs through constructor injection
-     */
-    single<Configuration> {
-        RealmConfiguration.Builder()
-            .name("devtyme.db")
-            .deleteRealmIfMigrationNeeded()
-            .schemaVersion(schemaVersion = 1)
-            .schema(setOf(AccessTokenEntity::class))
-            .build()
-    }
-    single { Realm.open(configuration = get()) }
-    single { AccessTokenDao(realm = get()) }
+    single { AccessTokenDao(databaseDriverFactory = get()) }
 
     single<AuthRepository> { AuthRepositoryImpl(apiService = get(), accessTokenDao = get()) }
     single<DateTimeRepository> { DateTimeRepositoryImpl() }
     single<SummariesRepository> { SummariesRepositoryImpl(apiService = get(), settings = get()) }
 }
+
+expect fun platformModule(): Module

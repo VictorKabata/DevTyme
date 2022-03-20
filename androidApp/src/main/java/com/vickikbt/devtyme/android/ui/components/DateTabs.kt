@@ -15,6 +15,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.vickikbt.devtyme.android.utils.toPresentation
 
 @Composable
 fun DatesTabs(
@@ -47,7 +48,7 @@ fun DatesTabs(
                 onClick = { onTabItemClick(index) },
                 text = {
                     Text(
-                        text = tabItem,
+                        text = tabItem.toPresentation(),
                         color = if (isSelected) Color.Black else MaterialTheme.colors.onPrimary,
                         fontSize = if (isSelected) 18.sp else 14.sp,
                         style = MaterialTheme.typography.h5,

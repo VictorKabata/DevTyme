@@ -15,7 +15,9 @@ object KmmDependencies {
     const val ktoriOS = "io.ktor:ktor-client-ios:${Versions.ktor}"
     const val ktorClientAuth = "io.ktor:ktor-client-auth:${Versions.ktor}"
 
-    const val realm = "io.realm.kotlin:library-base:${Versions.realm}"
+    const val sqlDelight = "com.squareup.sqldelight:runtime:${Versions.sqlDelight}"
+    const val sqlDelightAndroid = "com.squareup.sqldelight:android-driver:${Versions.sqlDelight}"
+    const val sqlDelightIos = "com.squareup.sqldelight:native-driver:${Versions.sqlDelight}"
 
     const val napier = "io.github.aakira:napier:${Versions.napier}"
 
