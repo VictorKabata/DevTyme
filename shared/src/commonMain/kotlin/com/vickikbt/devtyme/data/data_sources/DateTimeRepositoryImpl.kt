@@ -1,8 +1,7 @@
 package com.vickikbt.devtyme.data.data_sources
 
 import com.vickikbt.devtyme.domain.repositories.DateTimeRepository
-import com.vickikbt.devtyme.utils.daysShift
-import io.github.aakira.napier.Napier
+import com.vickikbt.devtyme.domain.utils.daysShift
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.datetime.Clock
