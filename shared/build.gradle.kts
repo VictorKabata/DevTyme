@@ -2,7 +2,6 @@ plugins {
     kotlin("multiplatform")
     id("com.android.library")
     kotlin("plugin.serialization") version Versions.kotlinSerialization
-    id("io.realm.kotlin") version Versions.realm
     id("com.squareup.sqldelight")
 }
 
@@ -33,7 +32,6 @@ kotlin {
                 implementation(KmmDependencies.ktorLogging)
                 implementation(KmmDependencies.ktorClientAuth)
 
-                implementation(KmmDependencies.realm)
                 implementation(KmmDependencies.sqlDelight)
 
                 api(KmmDependencies.napier)

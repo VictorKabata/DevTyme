@@ -8,7 +8,7 @@ uid TEXT DEFAULT NULL PRIMARY KEY
 
 saveToken:
 INSERT OR REPLACE INTO AccessTokenEntity(accessToken,refreshToken,scope,tokenType,uid)
-VALUES (?,?,?,?,?);
+VALUES ?;
 
 getToken:
 SELECT * FROM AccessTokenEntity;
