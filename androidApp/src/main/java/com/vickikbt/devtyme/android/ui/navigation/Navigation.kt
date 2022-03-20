@@ -10,12 +10,15 @@ import androidx.navigation.compose.composable
 import com.vickikbt.devtyme.android.ui.screens.home_screen.HomeScreen
 import com.vickikbt.devtyme.android.ui.screens.login_screen.LoginScreen
 import com.vickikbt.devtyme.android.ui.screens.webview_screen.WebViewScreen
+import io.github.aakira.napier.Napier
 
 @ExperimentalFoundationApi
 @ExperimentalAnimationApi
 @ExperimentalMaterialApi
 @Composable
 fun Navigation(navController: NavHostController, isLoggedIn: Boolean) {
+
+    Napier.e("Is user logged in: $isLoggedIn")
 
     NavHost(
         navController = navController,

@@ -31,6 +31,7 @@ import com.vickikbt.devtyme.android.ui.components.HomeToolbar
 import com.vickikbt.devtyme.android.ui.components.ItemProjectOverview
 import com.vickikbt.devtyme.android.utils.toHours
 import com.vickikbt.devtyme.android.utils.toMinutes
+import io.github.aakira.napier.Napier
 import org.koin.androidx.compose.getViewModel
 import java.util.*
 
@@ -48,12 +49,15 @@ fun HomeScreen(navController: NavController, viewModel: HomeViewModel = getViewM
     val currentUserProfile = viewModel.currentUser.observeAsState().value
     val greetingMessage = viewModel.greetingMessage.observeAsState().value
     val currentDate = viewModel.currentDate.observeAsState().value
-    val daysOfWeek = viewModel.daysOfWeek.observeAsState().value
+    val daysOfWeek = viewModel.daysOfWeek.observeAsState()
     val summaries = viewModel.summaries.observeAsState().value?.summary?.get(0)
     val dailyGoal = viewModel.dailyGoal.observeAsState().value
 
-    var selectedDate by remember { mutableStateOf(0) }
     val scrollState: ScrollState = rememberScrollState()
+    var selectedDate by remember { mutableStateOf(daysOfWeek.value?.indexOf(currentDate)) }
+
+    Napier.e("Selected date: $selectedDate")
+    Napier.e("Selected date 2: ${daysOfWeek.value?.indexOf(currentDate)}")
 
     val lottieAnimation =
         rememberLottieComposition(spec = LottieCompositionSpec.RawRes(R.raw.trophy))
@@ -79,7 +83,7 @@ fun HomeScreen(navController: NavController, viewModel: HomeViewModel = getViewM
         Column {
 
             //region Dates Tabs
-            daysOfWeek?.let {
+            daysOfWeek.value?.let {
                 DatesTabs(
                     modifier = Modifier.fillMaxWidth(),
                     dates = it,
