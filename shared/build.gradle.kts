@@ -33,6 +33,7 @@ kotlin {
                 implementation(KmmDependencies.ktorClientAuth)
 
                 implementation(KmmDependencies.sqlDelight)
+                implementation(KmmDependencies.sqlDelightCoroutine)
 
                 api(KmmDependencies.napier)
 
