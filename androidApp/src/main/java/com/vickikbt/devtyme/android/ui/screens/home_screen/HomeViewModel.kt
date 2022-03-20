@@ -33,8 +33,8 @@ class HomeViewModel constructor(
     private val _summaries = MutableLiveData<Summaries>()
     val summaries: LiveData<Summaries> get() = _summaries
 
-    private val _dailyGoal = MutableLiveData<Int?>()
-    val dailyGoal: LiveData<Int?> get() = _dailyGoal
+    private val _dailyGoal = MutableLiveData<Long?>()
+    val dailyGoal: LiveData<Long?> get() = _dailyGoal
 
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> get() = _isLoading
@@ -109,7 +109,7 @@ class HomeViewModel constructor(
     }
 
     fun saveDailyGoal(hours: Int) {
-        viewModelScope.launch { summariesRepository.saveDailyGoal(hours = hours) }
+        viewModelScope.launch { summariesRepository.saveDailyGoal(hours = hours.toLong()) }
     }
 
     fun getDailyGoal() {

@@ -2,6 +2,7 @@ package com.vickikbt.devtyme.di
 
 import com.russhwolf.settings.Settings
 import com.vickikbt.devtyme.data.cache.sqldelight.AccessTokenDao
+import com.vickikbt.devtyme.data.cache.sqldelight.DailyGoalDao
 import com.vickikbt.devtyme.data.data_sources.AuthRepositoryImpl
 import com.vickikbt.devtyme.data.data_sources.DateTimeRepositoryImpl
 import com.vickikbt.devtyme.data.data_sources.SummariesRepositoryImpl
@@ -57,10 +58,11 @@ val commonModule = module {
     single<ApiService> { ApiServiceImpl(httpClient = get()) }
 
     single { AccessTokenDao(databaseDriverFactory = get()) }
+    single { DailyGoalDao(databaseDriverFactory = get()) }
 
     single<AuthRepository> { AuthRepositoryImpl(apiService = get(), accessTokenDao = get()) }
     single<DateTimeRepository> { DateTimeRepositoryImpl() }
-    single<SummariesRepository> { SummariesRepositoryImpl(apiService = get(), settings = get()) }
+    single<SummariesRepository> { SummariesRepositoryImpl(apiService = get(), dailyGoalDao = get()) }
 }
 
 expect fun platformModule(): Module

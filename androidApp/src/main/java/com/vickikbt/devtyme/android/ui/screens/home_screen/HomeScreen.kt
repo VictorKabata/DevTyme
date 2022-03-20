@@ -103,7 +103,7 @@ fun HomeScreen(navController: NavController, viewModel: HomeViewModel = getViewM
 
                 Spacer(modifier = Modifier.height(12.dp))
 
-                if (dailyGoal == null || dailyGoal == 0) {
+                if (dailyGoal == null || dailyGoal == 0L) {
                     //region Set Daily Goal
                     Button(
                         modifier = Modifier
