@@ -5,6 +5,7 @@ object Versions {
     const val kotlinxSerialization = "1.2.2"
     const val kotlinxCoroutines = "1.6.0"
     const val realm = "0.9.0"
+    const val sqlDelight = "1.5.3"
     const val napier = "2.4.0"
     const val kotlinxDateTime = "0.3.2"
     const val multiplatformSettings = "0.8.1"
