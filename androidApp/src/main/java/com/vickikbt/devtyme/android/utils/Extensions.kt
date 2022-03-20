@@ -22,6 +22,11 @@ fun Int.toMinutes(): String {
     else "${this}min"
 }
 
+fun Long.toHours(): String {
+    return if (this > 1) "${this}hrs"
+    else "${this}hr"
+}
+
 fun String.toPresentation(): String {
     val inputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
     val outputFormat = SimpleDateFormat("EEEEE\ndd", Locale.getDefault())

@@ -1,7 +1,8 @@
 package com.vickikbt.devtyme.data.cache.sqldelight
 
+import com.squareup.sqldelight.runtime.coroutines.asFlow
 import com.vickikbt.devtyme.domain.utils.DatabaseDriverFactory
-import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.map
 
 class AccessTokenDao constructor(private val databaseDriverFactory: DatabaseDriverFactory) {
 
@@ -23,7 +24,7 @@ class AccessTokenDao constructor(private val databaseDriverFactory: DatabaseDriv
      * Returns all data store in access token entity table in SQLDelight database
      * as a flow
      */
-    val getToken = flowOf(dbQuery.getToken().executeAsOneOrNull())
+    val getToken = dbQuery.getToken().asFlow().map { it.executeAsOneOrNull() }
 
     /**
      * Deletes all data in access token entity table in SQLDelight database

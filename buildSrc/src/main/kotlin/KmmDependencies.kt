@@ -16,6 +16,8 @@ object KmmDependencies {
     const val ktorClientAuth = "io.ktor:ktor-client-auth:${Versions.ktor}"
 
     const val sqlDelight = "com.squareup.sqldelight:runtime:${Versions.sqlDelight}"
+    const val sqlDelightCoroutine =
+        "com.squareup.sqldelight:coroutines-extensions:${Versions.sqlDelight}"
     const val sqlDelightAndroid = "com.squareup.sqldelight:android-driver:${Versions.sqlDelight}"
     const val sqlDelightIos = "com.squareup.sqldelight:native-driver:${Versions.sqlDelight}"
 

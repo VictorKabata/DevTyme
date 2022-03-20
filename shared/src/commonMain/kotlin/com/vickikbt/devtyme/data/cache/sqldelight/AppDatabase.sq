@@ -6,6 +6,10 @@ tokenType TEXT DEFAULT NULL,
 uid TEXT DEFAULT NULL PRIMARY KEY
 );
 
+CREATE TABLE DailyGoalEntity(
+dailyGoal INTEGER DEFAULT NULL
+);
+
 saveToken:
 INSERT OR REPLACE INTO AccessTokenEntity(accessToken,refreshToken,scope,tokenType,uid)
 VALUES ?;
@@ -15,3 +19,10 @@ SELECT * FROM AccessTokenEntity;
 
 deleteToken:
 DELETE FROM AccessTokenEntity;
+
+saveDailyGoal:
+INSERT OR REPLACE INTO DailyGoalEntity(dailyGoal)
+VALUES (?);
+
+getDailyGoal:
+SELECT * FROM DailyGoalEntity;

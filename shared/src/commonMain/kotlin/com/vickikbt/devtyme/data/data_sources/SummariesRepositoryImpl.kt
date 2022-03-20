@@ -1,6 +1,6 @@
 package com.vickikbt.devtyme.data.data_sources
 
-import com.russhwolf.settings.Settings
+import com.vickikbt.devtyme.data.cache.sqldelight.DailyGoalDao
 import com.vickikbt.devtyme.data.mappers.toDomain
 import com.vickikbt.devtyme.data.network.ApiService
 import com.vickikbt.devtyme.domain.models.Summaries
@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.flowOf
 
 class SummariesRepositoryImpl constructor(
     private val apiService: ApiService,
-    private val settings: Settings
+    private val dailyGoalDao: DailyGoalDao
 ) : SummariesRepository {
 
     override suspend fun fetchSummaries(start: String?, range: String?): Flow<Summaries?> {
@@ -18,10 +18,10 @@ class SummariesRepositoryImpl constructor(
         return flowOf(response?.toDomain())
     }
 
-    override suspend fun saveDailyGoal(hours: Int) =
-        settings.putInt(key = "daily_goal", value = hours)
+    override suspend fun saveDailyGoal(hours: Long) =
+        dailyGoalDao.saveDailyGoal(dailyGoal = hours)
 
-    override suspend fun getDailyGoal(): Flow<Int?> {
-        return flowOf(settings.getIntOrNull(key = "daily_goal"))
+    override suspend fun getDailyGoal(): Flow<Long?> {
+        return dailyGoalDao.getDailyGoal
     }
 }
