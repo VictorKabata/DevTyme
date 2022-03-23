@@ -12,4 +12,6 @@
     <string name="title_languages">Languages</string>
 
     <string name="set_daily_goal">Set Daily Goal</string>
+    <string name="set">Set</string>
+    <string name="cancel">Cancel</string>
 </resources>
