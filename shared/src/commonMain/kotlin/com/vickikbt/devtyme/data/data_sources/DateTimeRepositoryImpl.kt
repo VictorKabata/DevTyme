@@ -1,10 +1,13 @@
 package com.vickikbt.devtyme.data.data_sources
 
 import com.vickikbt.devtyme.domain.repositories.DateTimeRepository
-import com.vickikbt.devtyme.utils.daysShift
+import com.vickikbt.devtyme.domain.utils.daysShift
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
-import kotlinx.datetime.*
+import kotlinx.datetime.Clock
+import kotlinx.datetime.DayOfWeek
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toLocalDateTime
 
 class DateTimeRepositoryImpl : DateTimeRepository {
 
@@ -20,18 +23,18 @@ class DateTimeRepositoryImpl : DateTimeRepository {
     }
 
     override fun getCurrentDate(): Flow<String> {
-        return flowOf(Clock.System.now().toString())
+        val currentDate = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()).date
+        return flowOf(currentDate.toString())
     }
 
     override fun getDaysOfWeek(): Flow<List<String>> {
         val today = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()).date
-        val days = mutableListOf<LocalDate>()
+        val days = mutableListOf<String>()
         val firstWeekDay = today.daysShift(-DayOfWeek.values().indexOf(today.dayOfWeek))
         for (i in 0 until DayOfWeek.values().count()) {
-            days.add(firstWeekDay.daysShift(i))
+            days.add(firstWeekDay.daysShift(i).toString())
         }
-        val dayStrings = days.map { "${it.dayOfWeek.name[0]}\n${it.dayOfMonth}" }
 
-        return flowOf(dayStrings)
+        return flowOf(days)
     }
 }

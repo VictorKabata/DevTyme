@@ -12,6 +12,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.vickikbt.devtyme.android.ui.navigation.Navigation
 import com.vickikbt.devtyme.android.ui.theme.DevTymeTheme
@@ -25,7 +26,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // installSplashScreen()
+        installSplashScreen()
 
         setContent {
             DevTymeTheme {
@@ -41,12 +42,15 @@ class MainActivity : ComponentActivity() {
 @Composable
 private fun MainScreen(viewModel: MainActivityViewModel = getViewModel()) {
     val navController = rememberAnimatedNavController()
-    val userAccessToken by remember { mutableStateOf(viewModel.accessToken) }
+    val userAccessToken by remember { mutableStateOf(viewModel.accessToken) }.value
 
     Scaffold(
         bottomBar = {}
     ) {
-        Navigation(navController = navController, isLoggedIn = !userAccessToken.value?.accessToken.isNullOrEmpty())
+        Navigation(
+            navController = navController,
+            isLoggedIn = !userAccessToken?.accessToken.isNullOrEmpty()
+        )
     }
 }
 

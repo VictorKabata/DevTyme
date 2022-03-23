@@ -21,7 +21,7 @@ data class AccessTokenDto(
     var tokenType: String? = null,
 
     @SerialName("uid")
-    var uid: String? = null,
+    var uid: String,
 
     @SerialName("created_at")
     var createdAt: Float? = null

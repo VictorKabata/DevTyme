@@ -1,6 +1,6 @@
 package com.vickikbt.devtyme.data.network.utils
 
-import com.vickikbt.devtyme.data.cache.realm.AccessTokenDao
+import com.vickikbt.devtyme.data.cache.sqldelight.AccessTokenDao
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import org.koin.core.component.KoinComponent

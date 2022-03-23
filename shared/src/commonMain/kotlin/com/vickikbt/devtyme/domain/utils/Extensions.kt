@@ -1,4 +1,4 @@
-package com.vickikbt.devtyme.utils
+package com.vickikbt.devtyme.domain.utils
 
 import kotlinx.datetime.DateTimeUnit
 import kotlinx.datetime.LocalDate

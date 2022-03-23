@@ -27,6 +27,7 @@ import com.airbnb.lottie.compose.animateLottieCompositionAsState
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.vickikbt.devtyme.android.R
 import com.vickikbt.devtyme.android.ui.components.DatesTabs
+import com.vickikbt.devtyme.android.ui.components.DialogDailyGoal
 import com.vickikbt.devtyme.android.ui.components.HomeToolbar
 import com.vickikbt.devtyme.android.ui.components.ItemProjectOverview
 import com.vickikbt.devtyme.android.utils.toHours
@@ -48,12 +49,14 @@ fun HomeScreen(navController: NavController, viewModel: HomeViewModel = getViewM
     val currentUserProfile = viewModel.currentUser.observeAsState().value
     val greetingMessage = viewModel.greetingMessage.observeAsState().value
     val currentDate = viewModel.currentDate.observeAsState().value
-    val daysOfWeek = viewModel.daysOfWeek.observeAsState().value
+    val daysOfWeek = viewModel.daysOfWeek.observeAsState()
     val summaries = viewModel.summaries.observeAsState().value?.summary?.get(0)
     val dailyGoal = viewModel.dailyGoal.observeAsState().value
 
-    var selectedDate by remember { mutableStateOf(0) }
     val scrollState: ScrollState = rememberScrollState()
+    var selectedDate by remember { mutableStateOf(daysOfWeek.value?.indexOf(currentDate)) }
+
+    var showDailyGoalDialog by remember { mutableStateOf(false) }
 
     val lottieAnimation =
         rememberLottieComposition(spec = LottieCompositionSpec.RawRes(R.raw.trophy))
@@ -79,7 +82,7 @@ fun HomeScreen(navController: NavController, viewModel: HomeViewModel = getViewM
         Column {
 
             //region Dates Tabs
-            daysOfWeek?.let {
+            daysOfWeek.value?.let {
                 DatesTabs(
                     modifier = Modifier.fillMaxWidth(),
                     dates = it,
@@ -99,13 +102,13 @@ fun HomeScreen(navController: NavController, viewModel: HomeViewModel = getViewM
 
                 Spacer(modifier = Modifier.height(12.dp))
 
-                if (dailyGoal == null || dailyGoal == 0) {
+                if (dailyGoal == null || dailyGoal == 0L) {
                     //region Set Daily Goal
                     Button(
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(vertical = 12.dp),
-                        onClick = { viewModel.saveDailyGoal(hours = 9) }, // ToDo: Open dialog to set goal
+                        onClick = { showDailyGoalDialog = !showDailyGoalDialog },
                         contentPadding = PaddingValues(vertical = 8.dp),
                         shape = RoundedCornerShape(6.dp),
                         colors = ButtonDefaults.buttonColors(
@@ -348,6 +351,18 @@ fun HomeScreen(navController: NavController, viewModel: HomeViewModel = getViewM
                         }
                 }
                 //endregion
+
+                if (showDailyGoalDialog) {
+                    DialogDailyGoal(
+                        showDialog = showDailyGoalDialog,
+                        dailyGoal = dailyGoal?.toInt() ?: 0,
+                        onPositiveActionClicked = {
+                            viewModel.saveDailyGoal(hours = it)
+                            showDailyGoalDialog = false
+                        },
+                        onNegativeActionClicked = { showDailyGoalDialog = false }
+                    )
+                }
             }
         }
     }
