@@ -27,11 +27,11 @@ import com.airbnb.lottie.compose.animateLottieCompositionAsState
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.vickikbt.devtyme.android.R
 import com.vickikbt.devtyme.android.ui.components.DatesTabs
+import com.vickikbt.devtyme.android.ui.components.DialogDailyGoal
 import com.vickikbt.devtyme.android.ui.components.HomeToolbar
 import com.vickikbt.devtyme.android.ui.components.ItemProjectOverview
 import com.vickikbt.devtyme.android.utils.toHours
 import com.vickikbt.devtyme.android.utils.toMinutes
-import io.github.aakira.napier.Napier
 import org.koin.androidx.compose.getViewModel
 import java.util.*
 
@@ -56,8 +56,7 @@ fun HomeScreen(navController: NavController, viewModel: HomeViewModel = getViewM
     val scrollState: ScrollState = rememberScrollState()
     var selectedDate by remember { mutableStateOf(daysOfWeek.value?.indexOf(currentDate)) }
 
-    Napier.e("Selected date: $selectedDate")
-    Napier.e("Selected date 2: ${daysOfWeek.value?.indexOf(currentDate)}")
+    var showDailyGoalDialog by remember { mutableStateOf(false) }
 
     val lottieAnimation =
         rememberLottieComposition(spec = LottieCompositionSpec.RawRes(R.raw.trophy))
@@ -109,7 +108,7 @@ fun HomeScreen(navController: NavController, viewModel: HomeViewModel = getViewM
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(vertical = 12.dp),
-                        onClick = { viewModel.saveDailyGoal(hours = 9) }, // ToDo: Open dialog to set goal
+                        onClick = { showDailyGoalDialog = !showDailyGoalDialog },
                         contentPadding = PaddingValues(vertical = 8.dp),
                         shape = RoundedCornerShape(6.dp),
                         colors = ButtonDefaults.buttonColors(
@@ -352,6 +351,18 @@ fun HomeScreen(navController: NavController, viewModel: HomeViewModel = getViewM
                         }
                 }
                 //endregion
+
+                if (showDailyGoalDialog) {
+                    DialogDailyGoal(
+                        showDialog = showDailyGoalDialog,
+                        dailyGoal = dailyGoal?.toInt() ?: 0,
+                        onPositiveActionClicked = {
+                            viewModel.saveDailyGoal(hours = it)
+                            showDailyGoalDialog = false
+                        },
+                        onNegativeActionClicked = { showDailyGoalDialog = false }
+                    )
+                }
             }
         }
     }
