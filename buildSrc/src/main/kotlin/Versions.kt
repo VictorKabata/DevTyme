@@ -12,7 +12,7 @@ object Versions {
     // KMM test libs
     const val mockk = "1.12.3"
 
-    const val gradle = "7.1.1"
+    const val gradle = "7.1.3"
     const val kotlin = "1.6.10"
     const val detekt = "1.19.0"
     const val desugaring = "1.1.5"
