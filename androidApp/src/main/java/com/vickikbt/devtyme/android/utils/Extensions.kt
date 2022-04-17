@@ -13,8 +13,11 @@ fun Context.findActivity(): Activity? = when (this) {
 }
 
 fun Int.toHours(): String {
-    return if (this > 1) "${this}hrs"
-    else "${this}hr"
+    return when {
+        this == 0 -> ""
+        this > 1 -> "${this}hrs"
+        else -> "${this}hr"
+    }
 }
 
 fun Int.toMinutes(): String {
@@ -30,6 +33,14 @@ fun Long.toHours(): String {
 fun String.toPresentation(): String {
     val inputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
     val outputFormat = SimpleDateFormat("EEEEE\ndd", Locale.getDefault())
+
+    val date = inputFormat.parse(this)
+    return outputFormat.format(date).toString()
+}
+
+fun String.toChartData(): String {
+    val inputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+    val outputFormat = SimpleDateFormat("EEEEE", Locale.getDefault())
 
     val date = inputFormat.parse(this)
     return outputFormat.format(date).toString()
