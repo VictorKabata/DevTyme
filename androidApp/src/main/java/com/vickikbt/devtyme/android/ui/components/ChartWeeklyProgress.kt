@@ -44,12 +44,11 @@ fun ChartWeeklyProgress(
         val spacePerDay = (size.width - spacing) / 7
         (0..6).forEach { i ->
             val dayOfWeek = daysOfWeek?.get(i)?.toChartData()
-            Napier.e("Day of week: $dayOfWeek")
             drawContext.canvas.nativeCanvas.apply {
                 drawText(
                     dayOfWeek ?: "",
                     spacing + i * spacePerDay,
-                    size.height - 5,
+                    size.height - 6,
                     textPaint
                 )
             }
@@ -58,7 +57,7 @@ fun ChartWeeklyProgress(
         // Y-Axis
         val spacePerHour = (size.width - spacing) / hoursWorked.size
         val hoursStep = (upperValue - lowerValue) / 6
-        (0..6).forEach { i ->
+        (0 until upperValue).forEach { i ->
             drawContext.canvas.nativeCanvas.apply {
                 drawText(
                     (lowerValue + hoursStep * i).toString(),
