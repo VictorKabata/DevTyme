@@ -274,7 +274,6 @@ fun HomeScreen(navController: NavController, viewModel: HomeViewModel = getViewM
                     ) {
                         val grandTotalHours = arrayListOf<Float>()
                         summaries?.forEach { summary ->
-                            Napier.e("Summary: $summary")
                             val timeInFloat = (summary.grandTotal?.hours)!!.toFloat()
                             grandTotalHours.add(timeInFloat)
                         }
@@ -336,7 +335,7 @@ fun HomeScreen(navController: NavController, viewModel: HomeViewModel = getViewM
                         ?.forEach { project ->
                             ItemProjectOverview(
                                 title = project.name ?: "",
-                                hours = "${project.hours}hr ${project.minutes}mins"
+                                hours = "${project.hours?.toHours()} ${project.minutes?.toMinutes()}"
                             )
                         }
                 }
@@ -360,7 +359,7 @@ fun HomeScreen(navController: NavController, viewModel: HomeViewModel = getViewM
                         ?.forEach { language ->
                             ItemProjectOverview(
                                 title = language.name ?: "",
-                                hours = "${language.hours}hr ${language.minutes}mins"
+                                hours = "${language.hours?.toHours()} ${language.minutes?.toMinutes()}"
                             )
                         }
                 }

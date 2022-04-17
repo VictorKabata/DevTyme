@@ -21,8 +21,11 @@ fun Int.toHours(): String {
 }
 
 fun Int.toMinutes(): String {
-    return if (this > 1) "${this}mins"
-    else "${this}min"
+    return when {
+        this == 0 -> ""
+        this > 1 -> "${this}mins"
+        else -> "${this}min"
+    }
 }
 
 fun Long.toHours(): String {
