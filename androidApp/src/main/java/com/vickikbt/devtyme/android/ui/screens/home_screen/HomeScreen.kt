@@ -26,12 +26,10 @@ import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.animateLottieCompositionAsState
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.vickikbt.devtyme.android.R
-import com.vickikbt.devtyme.android.ui.components.DatesTabs
-import com.vickikbt.devtyme.android.ui.components.DialogDailyGoal
-import com.vickikbt.devtyme.android.ui.components.HomeToolbar
-import com.vickikbt.devtyme.android.ui.components.ItemProjectOverview
+import com.vickikbt.devtyme.android.ui.components.*
 import com.vickikbt.devtyme.android.utils.toHours
 import com.vickikbt.devtyme.android.utils.toMinutes
+import io.github.aakira.napier.Napier
 import org.koin.androidx.compose.getViewModel
 import java.util.*
 
@@ -50,7 +48,8 @@ fun HomeScreen(navController: NavController, viewModel: HomeViewModel = getViewM
     val greetingMessage = viewModel.greetingMessage.observeAsState().value
     val currentDate = viewModel.currentDate.observeAsState().value
     val daysOfWeek = viewModel.daysOfWeek.observeAsState()
-    val summaries = viewModel.summaries.observeAsState().value?.summary?.get(0)
+    val summaries = viewModel.summaries.observeAsState().value?.summary
+    val summary = summaries?.get(0)
     val dailyGoal = viewModel.dailyGoal.observeAsState().value
 
     val scrollState: ScrollState = rememberScrollState()
@@ -129,7 +128,7 @@ fun HomeScreen(navController: NavController, viewModel: HomeViewModel = getViewM
                     //endregion
                 } else {
                     //region Daily Goal
-                    summaries?.grandTotal?.let {
+                    summary?.grandTotal?.let {
                         val progress by remember {
                             mutableStateOf((it.hours?.toDouble() ?: 0.0) / dailyGoal)
                         }
@@ -247,7 +246,7 @@ fun HomeScreen(navController: NavController, viewModel: HomeViewModel = getViewM
                 }
 
                 //region Weekly Progress
-                /*Spacer(modifier = Modifier.height(12.dp))
+                Spacer(modifier = Modifier.height(12.dp))
 
                 Text(
                     text = stringResource(R.string.title_weekly_progress),
@@ -263,8 +262,7 @@ fun HomeScreen(navController: NavController, viewModel: HomeViewModel = getViewM
 
                 Card(
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .height(350.dp),
+                        .fillMaxWidth(),
                     elevation = 0.dp,
                     shape = RoundedCornerShape(6.dp),
                     backgroundColor = MaterialTheme.colors.primary.copy(alpha = .2f)
@@ -272,12 +270,27 @@ fun HomeScreen(navController: NavController, viewModel: HomeViewModel = getViewM
                     ConstraintLayout(
                         modifier = Modifier.padding(
                             horizontal = 12.dp,
-                            vertical = 10.dp
+                            vertical = 16.dp
                         )
                     ) {
-                        // ToDo: Weekly stats
+                        val grandTotalHours = arrayListOf<Float>()
+                        summaries?.forEach { summary ->
+                            Napier.e("Summary: $summary")
+                            val timeInFloat = (summary.grandTotal?.hours)!!.toFloat()
+                            grandTotalHours.add(timeInFloat)
+                        }
+
+                        Napier.e("Grand total hours: $grandTotalHours")
+
+                        ChartWeeklyProgress(
+                            hoursWorked = grandTotalHours,
+                            daysOfWeek = daysOfWeek.value,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(270.dp)
+                        )
                     }
-                }*/
+                }
                 //endregion
 
                 //region Work Overview
@@ -294,7 +307,7 @@ fun HomeScreen(navController: NavController, viewModel: HomeViewModel = getViewM
                 )
 
                 Column(modifier = Modifier, verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                    summaries?.categories?.filter { it.hours != 0 || it.minutes != 0 }
+                    summary?.categories?.filter { it.hours != 0 || it.minutes != 0 }
                         ?.forEach { category ->
                             ItemProjectOverview(
                                 title = category.name ?: "",
@@ -318,7 +331,7 @@ fun HomeScreen(navController: NavController, viewModel: HomeViewModel = getViewM
                 )
 
                 Column(modifier = Modifier, verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                    summaries?.projects?.filter { it.hours != 0 || it.minutes != 0 }
+                    summary?.projects?.filter { it.hours != 0 || it.minutes != 0 }
                         ?.forEach { project ->
                             ItemProjectOverview(
                                 title = project.name ?: "",
@@ -342,7 +355,7 @@ fun HomeScreen(navController: NavController, viewModel: HomeViewModel = getViewM
                 )
 
                 Column(modifier = Modifier, verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                    summaries?.languages?.filter { it.hours != 0 || it.minutes != 0 }
+                    summary?.languages?.filter { it.hours != 0 || it.minutes != 0 }
                         ?.forEach { language ->
                             ItemProjectOverview(
                                 title = language.name ?: "",
