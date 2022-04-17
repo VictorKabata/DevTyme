@@ -58,11 +58,15 @@ class ApiServiceImpl constructor(private val httpClient: HttpClient) : ApiServic
         }
     }
 
-    override suspend fun fetchSummaries(start: String?, range: String?): SummariesDto? {
+    override suspend fun fetchSummaries(
+        start: String?,
+        end: String?,
+        range: String?
+    ): SummariesDto? {
         return try {
             httpClient.get<SummariesDto>(urlString = "https://wakatime.com/api/v1/users/current/summaries") {
                 parameter("start", start)
-                parameter("end", start)
+                parameter("end", end)
                 parameter("range", range)
             }
         } catch (e: ServerResponseException) {

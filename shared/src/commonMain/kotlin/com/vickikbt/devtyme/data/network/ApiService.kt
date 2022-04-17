@@ -10,5 +10,9 @@ interface ApiService {
 
     suspend fun getCurrentUser(): CurrentUserDto?
 
-    suspend fun fetchSummaries(start: String? = null, range: String? = null): SummariesDto?
+    suspend fun fetchSummaries(
+        start: String? = null,
+        end: String? = null,
+        range: String? = null
+    ): SummariesDto?
 }

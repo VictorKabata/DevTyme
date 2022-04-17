@@ -13,8 +13,12 @@ class SummariesRepositoryImpl constructor(
     private val dailyGoalDao: DailyGoalDao
 ) : SummariesRepository {
 
-    override suspend fun fetchSummaries(start: String?, range: String?): Flow<Summaries?> {
-        val response = apiService.fetchSummaries(start = start, range = range)
+    override suspend fun fetchSummaries(
+        start: String?,
+        end: String?,
+        range: String?
+    ): Flow<Summaries?> {
+        val response = apiService.fetchSummaries(start = start, end = end, range = range)
         return flowOf(response?.toDomain())
     }
 

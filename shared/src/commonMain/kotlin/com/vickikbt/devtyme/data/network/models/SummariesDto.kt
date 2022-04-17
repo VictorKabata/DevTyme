@@ -10,8 +10,8 @@ data class SummariesDto(
     val summary: List<SummaryDto>? = null,
 
     @SerialName("end")
-    val end: String?=null,
+    val end: String? = null,
 
     @SerialName("start")
-    val start: String?=null
+    val start: String? = null
 )

@@ -5,7 +5,11 @@ import kotlinx.coroutines.flow.Flow
 
 interface SummariesRepository {
 
-    suspend fun fetchSummaries(start: String? = null, range: String? = null): Flow<Summaries?>
+    suspend fun fetchSummaries(
+        start: String? = null,
+        end: String? = null,
+        range: String? = null
+    ): Flow<Summaries?>
 
     suspend fun saveDailyGoal(hours: Long)
 
