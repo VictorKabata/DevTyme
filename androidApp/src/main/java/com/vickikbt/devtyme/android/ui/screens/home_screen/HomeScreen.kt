@@ -261,15 +261,14 @@ fun HomeScreen(navController: NavController, viewModel: HomeViewModel = getViewM
                 Spacer(modifier = Modifier.height(6.dp))
 
                 Card(
-                    modifier = Modifier
-                        .fillMaxWidth(),
+                    modifier = Modifier.fillMaxWidth(),
                     elevation = 0.dp,
                     shape = RoundedCornerShape(6.dp),
                     backgroundColor = MaterialTheme.colors.primary.copy(alpha = .2f)
                 ) {
                     ConstraintLayout(
                         modifier = Modifier.padding(
-                            horizontal = 12.dp,
+                            horizontal = 2.dp,
                             vertical = 16.dp
                         )
                     ) {
@@ -282,12 +281,14 @@ fun HomeScreen(navController: NavController, viewModel: HomeViewModel = getViewM
 
                         Napier.e("Grand total hours: $grandTotalHours")
 
+                        val weeksHours = listOf(0f, 4f, 3.4f, 4.8f, 2f, 5f, 3.4f)
+
                         ChartWeeklyProgress(
-                            hoursWorked = grandTotalHours,
+                            hoursWorked = weeksHours,
                             daysOfWeek = daysOfWeek.value,
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .height(270.dp)
+                                .height(300.dp)
                         )
                     }
                 }

@@ -12,7 +12,6 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.vickikbt.devtyme.android.utils.toChartData
-import com.vickikbt.devtyme.android.utils.toPresentation
 import io.github.aakira.napier.Napier
 import kotlin.math.roundToInt
 
@@ -56,13 +55,13 @@ fun ChartWeeklyProgress(
 
         // Y-Axis
         val spacePerHour = (size.width - spacing) / hoursWorked.size
-        val hoursStep = (upperValue - lowerValue) / 6
-        (0 until upperValue).forEach { i ->
+        val hoursStep = (upperValue - lowerValue) / 4
+        (0..upperValue).forEach { i ->
             drawContext.canvas.nativeCanvas.apply {
                 drawText(
                     (lowerValue + hoursStep * i).toString(),
                     30f,
-                    size.height - spacing - i * size.height / 6,
+                    size.height - spacing - i * size.height / 4,
                     textPaint
                 )
             }
